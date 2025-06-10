@@ -86,30 +86,16 @@
     <dependencies>
         <dependency>
             <groupId>net.imagej</groupId>
-            <artifactId>imagej</artifactId>
-            <scope>provided</scope>
+            <artifactId>ij</artifactId>
+            <scope>compile</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-math3 -->
         <dependency>
-            <groupId>net.imagej</groupId>
-            <artifactId>imagej-legacy</artifactId>
-            <scope>provided</scope>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+            <version>3.6.1</version>
+            <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>net.imagej</groupId>
-            <artifactId>imagej-common</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.imglib2</groupId>
-            <artifactId>imglib2</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.imglib2</groupId>
-            <artifactId>imglib2-algorithm</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -122,14 +108,17 @@
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf</artifactId>
             <version>3.5.4</version>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.miglayout/miglayout-swing -->
         <dependency>
             <groupId>com.miglayout</groupId>
             <artifactId>miglayout-swing</artifactId>
             <version>5.3</version>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
+    <build>
+        <finalName>SMPBasedMax_2_${project.version}</finalName>
+    </build>
 </project>
