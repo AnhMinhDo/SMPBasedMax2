@@ -1,18 +1,14 @@
 package schneiderlab.tools.smpbasedmax2;
 
-import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatLightLaf;
 import ij.plugin.PlugIn;
-import net.miginfocom.swing.MigLayout;
+import schneiderlab.tools.smpbasedmax2.uicomponents.MainDialog;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class SMP_Based_Max2 implements PlugIn {
 
     @Override
-    public void run(String s) {
+    public void run(String arg) {
         SwingUtilities.invokeLater(this::launchUI);
     }
 
@@ -29,8 +25,9 @@ public class SMP_Based_Max2 implements PlugIn {
         }
         JFrame frame = new JFrame("Main Windows of Application");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setLayout(null);
 
+        MainDialog form = new MainDialog(frame);
+        frame.setContentPane(form.getContentPane());
         frame.pack();
         frame.setVisible(true);
     }
