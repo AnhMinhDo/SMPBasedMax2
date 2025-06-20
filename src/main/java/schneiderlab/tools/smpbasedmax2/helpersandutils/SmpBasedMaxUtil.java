@@ -202,6 +202,10 @@ public class SmpBasedMaxUtil {
                     "_depth" + depth + "_8bit" + ".tif");
         }
     }
+
+    public static double calculatePercentageForSingleTask(double totalAmountOfWork){
+        return 100.0/totalAmountOfWork;
+    }
 }
 
 
