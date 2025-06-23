@@ -1,0 +1,147 @@
+package schneiderlab.tools.smpbasedmax2.services;
+
+
+import ij.IJ;
+import ij.ImagePlus;
+import ij.plugin.ChannelSplitter;
+import ij.plugin.RGBStackMerge;
+import schneiderlab.tools.smpbasedmax2.OutputTypeName;
+import schneiderlab.tools.smpbasedmax2.ZStackDirection;
+import schneiderlab.tools.smpbasedmax2.corecomputation.ManifoldBypassProjection;
+import schneiderlab.tools.smpbasedmax2.corecomputation.SMP_MIP_Projection;
+import schneiderlab.tools.smpbasedmax2.helpersandutils.SmpBasedMaxUtil;
+
+import java.awt.image.ImagingOpException;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+
+public class HandleSingleFileWithChannels {
+    private ImagePlus input;
+    private ZStackDirection zStackDirection;
+    private int stiffness;
+    private int filterSize;
+    private int offset;
+    private int depth;
+    private ImagePlus output;
+    private int referenceIndx;
+    private  ImagePlus merged;
+
+
+    public HandleSingleFileWithChannels(ImagePlus input,
+                                        ZStackDirection zStackDirection,
+                                        int stiffness,
+                                        int filterSize,
+                                        int offset,
+                                        int depth,
+                                        int referenceIndx) {
+        this.input = input;
+        // assign other attributes
+        this.zStackDirection = zStackDirection;
+        this.stiffness = stiffness;
+        this.filterSize = filterSize;
+        this.offset = offset;
+        this.depth = depth;
+        this.referenceIndx = referenceIndx;
+    }
+    public ImagePlus process(){
+        performProcessing();
+        return merged;
+    }
+
+    private void performProcessing() {
+        // split the channels and get the reference
+        ImagePlus[] channels = ChannelSplitter.split(input);
+        ImagePlus[] outputChannels = new ImagePlus[channels.length];
+        ImagePlus referenceChannel = channels[referenceIndx];
+        // process the reference channel first
+        HandleSingleFile hsf = new HandleSingleFile(referenceChannel, zStackDirection, stiffness, filterSize, offset, depth);
+        ImagePlus mainChannelsOutput = hsf.process();
+        outputChannels[referenceIndx] = mainChannelsOutput;
+        float[] envMaxzValues = hsf.getEnvMaxzValues();
+        for (int i = 0; i < channels.length; i++) {
+            if (i != referenceIndx) {
+                ImagePlus outputChannel = processOtherChannel(channels[i],envMaxzValues,zStackDirection,stiffness,filterSize,offset,depth);
+                outputChannels[i] = outputChannel;
+            }
+        }
+        merged = RGBStackMerge.mergeChannels(outputChannels,true);
+    }
+
+        private static ImagePlus processOtherChannel (ImagePlus otherChannel,
+        float[] envMaxzValues,
+        ZStackDirection zStackDirection,
+        int stiffness,
+        int filterSize,
+        int offset,
+        int depth) {
+            SmpBasedMaxUtil.preProcessInputImage(otherChannel);
+            ManifoldBypassProjection mbProjector = new ManifoldBypassProjection(otherChannel, envMaxzValues, offset);
+            ImagePlus projection = mbProjector.doManifoldBypassProjection();
+            ImagePlus zMapProjection = mbProjector.getManifoldBypassZmap();
+            if (depth != 0) {
+                SMP_MIP_Projection smpMipProjector = new SMP_MIP_Projection(otherChannel, zMapProjection, depth, zStackDirection);
+                return smpMipProjector.doProjection();
+//                ImagePlus smpMipZmap = smpMipProjector.getZmap();
+//            saveOutputOtherChannel(outputDir,
+//                    originalChannel,
+//                    stiffness,
+//                    filterSize,
+//                    offset,
+//                    depth,
+//                    projection,
+//                    zMapProjection,
+//                    projectedSMPMIPImage,
+//                    smpMipZmap);
+            } else {
+                return projection;
+            }
+        }
+
+//    private static void saveOutputOtherChannel(File outputDir,
+//                                               File originalChannel,
+//                                               int stiffness,
+//                                               int filterSize,
+//                                               int offset,
+//                                               int depth,
+//                                               ImagePlus projectedSMPImage,
+//                                               ImagePlus smpZmap){
+//        saveOutputOtherChannel(outputDir,
+//                originalChannel,
+//                stiffness,
+//                filterSize,
+//                offset,
+//                depth,
+//                projectedSMPImage,
+//                smpZmap,
+//                null,
+//                null);
+//    }
+//
+//    private static void saveOutputOtherChannel(File outputDir,
+//                                               File originalChannel,
+//                                               int stiffness,
+//                                               int filterSize,
+//                                               int offset,
+//                                               int depth,
+//                                               ImagePlus projectedSMPImage,
+//                                               ImagePlus smpZmap,
+//                                               ImagePlus projectedSMPMIPImage,
+//                                               ImagePlus smpMipZmap){
+//        String resultDir = outputDir.getAbsolutePath();
+//        String fileName = originalChannel.getName();
+//        if (projectedSMPMIPImage == null) {
+//            // Save SMP projected image and zMap
+//            SmpBasedMaxUtil.savePostProcessImagePlus(projectedSMPImage, OutputTypeName.SMP,resultDir,fileName, stiffness, filterSize, offset, depth,true);
+//            SmpBasedMaxUtil.savePostProcessImagePlus(smpZmap, OutputTypeName.SMP_ZMAP,resultDir,fileName, stiffness, filterSize, offset, depth);
+//        } else {
+//            // Save the depth-adjusted output
+//            SmpBasedMaxUtil.savePostProcessImagePlus(projectedSMPMIPImage, OutputTypeName.SMPbasedMIP,resultDir,fileName, stiffness, filterSize, offset, depth, true);
+//            SmpBasedMaxUtil.savePostProcessImagePlus(smpMipZmap, OutputTypeName.SMPbasedMIP_ZMAP,resultDir,fileName, stiffness, filterSize, offset, depth);
+//
+//        }
+    }
+
