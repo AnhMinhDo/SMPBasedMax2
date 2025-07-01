@@ -1,0 +1,125 @@
+JFDML JFormDesigner: "8.2.2.0.382" Java: "21.0.7" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
+			"$layoutConstraints": "hidemode 3,align center top"
+			"$columnConstraints": "[fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill]"
+			"$rowConstraints": "[][][][][][][][]"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2ZStackDirection"
+				"text": "Direction of Z stack: "
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 0 3 1,alignx right,growx 0"
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "comboBox1ZStackDirection"
+				"model": new javax.swing.DefaultComboBoxModel {
+					selectedItem: "IN"
+					addElement( "IN" )
+					addElement( "OUT" )
+				}
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 3 0,alignx left,growx 0"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label3Stiffness"
+				"text": "Envelope stiffness [pixels]:"
+				"labelFor": new FormReference( "spinner1Stiffeness" )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 1 3 1,alignx right,growx 0"
+			} )
+			add( new FormComponent( "javax.swing.JSpinner" ) {
+				name: "spinner1Stiffeness"
+				"model": new javax.swing.SpinnerNumberModel {
+					minimum: 0
+					value: 60
+				}
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 3 1"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label4FilterSize"
+				"text": "Enter final Filter size [pixel]:"
+				"labelFor": new FormReference( "spinner2FilterSize" )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 2 3 1,alignx right,growx 0"
+			} )
+			add( new FormComponent( "javax.swing.JSpinner" ) {
+				name: "spinner2FilterSize"
+				"model": new javax.swing.SpinnerNumberModel {
+					minimum: 0
+					value: 30
+				}
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 3 2"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label8Offset"
+				"text": "Offset [pixels]:"
+				"toolTipText": "Offset-N planes above(+) or below(-) blanket [pixels]"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 3 3 1,alignx right,growx 0"
+			} )
+			add( new FormComponent( "javax.swing.JSpinner" ) {
+				name: "spinner3Offset"
+				"model": new javax.swing.SpinnerNumberModel {
+					minimum: 0
+				}
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 3 3"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label6Depth"
+				"text": "Depth [pixels]:"
+				"labelFor": new FormReference( "spinner4Depth" )
+				"toolTipText": "Depth:MIP for N pixels into blanket [pixels]"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 4 3 1,alignx right,growx 0"
+			} )
+			add( new FormComponent( "javax.swing.JSpinner" ) {
+				name: "spinner4Depth"
+				"model": new javax.swing.SpinnerNumberModel {
+					minimum: 0
+				}
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 3 4"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "textField3Status"
+				"editable": false
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 5 2 1"
+			} )
+			add( new FormComponent( "javax.swing.JProgressBar" ) {
+				name: "progressBar1"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 2 5 2 1"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button1Parameter"
+				"text": "Confirm Parameters"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 1 6"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button5Cancel"
+				"text": "Cancel"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 2 6"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button4StartProcess"
+				"text": "Process"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 3 6"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 755, 300 )
+		} )
+	}
+}
