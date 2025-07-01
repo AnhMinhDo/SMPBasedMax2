@@ -8,26 +8,55 @@ import javax.swing.event.DocumentListener;
 
 public class TrackChangeInTheTextFieldUpdateChannelsAvailability implements DocumentListener {
     private JTextField textField;
-    private JComboBox comboBox;
-    private JCheckBox checkBox;
+    private JComboBox comboBoxSingle;
+    private JCheckBox checkBoxSingle;
+    private JComboBox comboBoxPreview;
+    private JCheckBox checkBoxPreview;
+    private JRadioButton radioButtonSingle;
+    private JRadioButton radioButtonPreview;
 
-    public TrackChangeInTheTextFieldUpdateChannelsAvailability(JTextField textField, JComboBox comboBox, JCheckBox checkBox) {
+    public TrackChangeInTheTextFieldUpdateChannelsAvailability(JTextField textField,
+                                                               JComboBox comboBoxSingle,
+                                                               JCheckBox checkBoxSingle,
+                                                               JComboBox comboBoxPreview,
+                                                               JCheckBox checkBoxPreview,
+                                                               JRadioButton radioButtonSingle,
+                                                               JRadioButton radioButtonPreview) {
         this.textField = textField;
-        this.comboBox = comboBox;
-        this.checkBox = checkBox;
+        this.comboBoxSingle = comboBoxSingle;
+        this.checkBoxSingle = checkBoxSingle;
+        this.comboBoxPreview = comboBoxPreview;
+        this.checkBoxPreview = checkBoxPreview;
+        this.radioButtonSingle = radioButtonSingle;
+        this.radioButtonPreview = radioButtonPreview;
     }
 
     @Override
     public void insertUpdate(DocumentEvent e) {
         ImagePlus inputFile = new ImagePlus(textField.getText());
         int numOfChannels = inputFile.getNChannels();
-        comboBox.removeAllItems();
+        comboBoxSingle.removeAllItems();
+        comboBoxPreview.removeAllItems();
+
         for (int i = 0; i < numOfChannels; i++) {
-            comboBox.addItem("channels " + (i+1));
+            comboBoxSingle.addItem("channels " + (i+1));
+            comboBoxPreview.addItem("channels " + (i+1));
         }
-        comboBox.setSelectedIndex(0);
+        comboBoxSingle.setSelectedIndex(0);
+        comboBoxPreview.setSelectedIndex(0);
         if(numOfChannels > 1){
-            checkBox.setSelected(true);
+            checkBoxSingle.setSelected(true);
+            checkBoxPreview.setSelected(true);
+            if(radioButtonSingle.isSelected()){
+                checkBoxSingle.setEnabled(true);
+            } else if (radioButtonPreview.isSelected()) {
+                checkBoxPreview.setEnabled(true);
+            }
+        } else {
+            checkBoxSingle.setSelected(false);
+            checkBoxSingle.setEnabled(false);
+            checkBoxPreview.setSelected(false);
+            checkBoxPreview.setEnabled(false);
         }
     }
 
