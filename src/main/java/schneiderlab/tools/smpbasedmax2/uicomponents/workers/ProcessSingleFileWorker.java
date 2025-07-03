@@ -7,12 +7,15 @@ import schneiderlab.tools.smpbasedmax2.OutputTypeName;
 import schneiderlab.tools.smpbasedmax2.ZStackDirection;
 import schneiderlab.tools.smpbasedmax2.helpersandutils.SmpBasedMaxUtil;
 import schneiderlab.tools.smpbasedmax2.services.HandleSingleFile;
+import schneiderlab.tools.smpbasedmax2.services.HandleSingleFileNoChannelSaveOutput;
 import schneiderlab.tools.smpbasedmax2.services.HandleSingleFileWithChannels;
+import schneiderlab.tools.smpbasedmax2.services.HandleSingleFileWithChannelsSaveOutput;
 
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.HashSet;
 
 public class ProcessSingleFileWorker extends SwingWorker<Void,Void> {
     private JTextField statusBar;
@@ -27,6 +30,8 @@ public class ProcessSingleFileWorker extends SwingWorker<Void,Void> {
     private float[] envMaxzValues;
     private final boolean hasManyChannels;
     private final int referenceChannelIdx;
+    private final int numberOfChannels;
+    private HashSet<OutputTypeName> outputType;
 
     private ImagePlus projectedImage;
     private ImagePlus zMap;
@@ -36,7 +41,18 @@ public class ProcessSingleFileWorker extends SwingWorker<Void,Void> {
     private ImagePlus smpMipZmap;
     private ImagePlus result;
 
-    public ProcessSingleFileWorker(int stiffness, int filterSize, ZStackDirection zStackDirection, int offset, int depth, String filePath, JTextField statusBar, boolean hasManyChannels, int referenceChannelIdx, JProgressBar progressBar) {
+    public ProcessSingleFileWorker(int stiffness,
+                                   int filterSize,
+                                   ZStackDirection zStackDirection,
+                                   int offset,
+                                   int depth,
+                                   String filePath,
+                                   JTextField statusBar,
+                                   boolean hasManyChannels,
+                                   int referenceChannelIdx,
+                                   JProgressBar progressBar,
+                                   int numberOfChannels,
+                                   HashSet<OutputTypeName> outputType) {
         this.stiffness = stiffness;
         this.filterSize = filterSize;
         this.zStackDirection = zStackDirection;
@@ -47,11 +63,13 @@ public class ProcessSingleFileWorker extends SwingWorker<Void,Void> {
         this.hasManyChannels = hasManyChannels;
         this.referenceChannelIdx = referenceChannelIdx;
         this.progressBar = progressBar;
+        this.numberOfChannels= numberOfChannels;
+        this.outputType= outputType;
     }
 
     @Override
     protected Void doInBackground() throws Exception {
-        if(!hasManyChannels) {
+        if(!hasManyChannels && numberOfChannels==1) {
             // Updating progress bar
             double percentageOf1Task = SmpBasedMaxUtil.calculatePercentageForSingleTask(1);
             double percentageOfCompletedTask = 0;
@@ -59,27 +77,38 @@ public class ProcessSingleFileWorker extends SwingWorker<Void,Void> {
             ImagePlus inputImageRaw = new ImagePlus(filePath);
             ImagePlus[] inputImageChannels = ChannelSplitter.split(inputImageRaw);
             ImagePlus inputImage = inputImageChannels[referenceChannelIdx];
-            HandleSingleFile handleSingleFile = new HandleSingleFile(inputImage,
-                    zStackDirection,
+            HandleSingleFileNoChannelSaveOutput hsfncso = new HandleSingleFileNoChannelSaveOutput(
+                    Paths.get(filePath),
+                    inputImage,
+                    outputType,
                     stiffness,
                     filterSize,
+                    zStackDirection,
                     offset,
                     depth);
-            result = handleSingleFile.process();
+            hsfncso.processAndSaveOutput();
             // Update progress bar
             percentageOfCompletedTask = percentageOfCompletedTask + percentageOf1Task;
             setProgress((int) percentageOfCompletedTask);
-            // save output
-            saveOutputToFile(result, filePath);
             return null;
+
         } else {
             // Update progress bar
             double percentageOf1Task = SmpBasedMaxUtil.calculatePercentageForSingleTask(1);
             double percentageOfCompletedTask = 0;
             // Perform single file projection
             ImagePlus inputImage = new ImagePlus(filePath);
-            HandleSingleFileWithChannels handleSingleFileWithChannels = new HandleSingleFileWithChannels(inputImage,zStackDirection,stiffness,filterSize,offset,depth,referenceChannelIdx);
-            result = handleSingleFileWithChannels.process();
+            HandleSingleFileWithChannelsSaveOutput hsfwcso = new HandleSingleFileWithChannelsSaveOutput(
+                    Paths.get(filePath),
+                    inputImage,
+                    outputType,
+                    stiffness,
+                    filterSize,
+                    zStackDirection,
+                    offset,
+                    depth,
+                    referenceChannelIdx);
+            hsfwcso.processAndSaveOutput();
             // Update progress bar
             percentageOfCompletedTask = percentageOfCompletedTask + percentageOf1Task;
             setProgress((int) percentageOfCompletedTask);
