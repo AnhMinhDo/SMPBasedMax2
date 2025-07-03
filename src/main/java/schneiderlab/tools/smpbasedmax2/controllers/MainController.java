@@ -59,6 +59,15 @@ public class MainController {
                         view.getCheckBox4PreviewRef(),
                                 view.getRadioButton1SingleFile(),
                                 view.getRadioButton3Preview()));
+        // update channels combobox multiple file when textFields get new directory
+        view.getTextField1DirPath().getDocument()
+                        .addDocumentListener(
+                                new TrackChangeInTheDirTextFieldUpdateChannelsAvailability(
+                                        view.getTextField1DirPath(),
+                                        view.getComboBox4BatchFileRef(),
+                                        view.getCheckBox3BatchFileRef()
+                                )
+                        );
         // SingleMode radio Button
         view.getRadioButton1SingleFile()
                 .addItemListener(new ProcessModeGroupButtonStateListener(
@@ -151,6 +160,7 @@ public class MainController {
                 view.getSpinner3Offset(),
                 view.getSpinner4Depth(),
                 view.getTextField2SingleFilePath(),
+                view.getTextField1DirPath(),
                 view.getCheckBox2SingleFileRef(),
                 view.getComboBox3SingleFileRef(),
                 view.getCheckBox3BatchFileRef(),
