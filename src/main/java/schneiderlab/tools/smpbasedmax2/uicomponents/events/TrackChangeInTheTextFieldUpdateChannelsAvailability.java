@@ -47,11 +47,9 @@ public class TrackChangeInTheTextFieldUpdateChannelsAvailability implements Docu
         if(numOfChannels > 1){
             checkBoxSingle.setSelected(true);
             checkBoxPreview.setSelected(true);
-            if(radioButtonSingle.isSelected()){
-                checkBoxSingle.setEnabled(true);
-            } else if (radioButtonPreview.isSelected()) {
-                checkBoxPreview.setEnabled(true);
-            }
+            checkBoxSingle.setEnabled(true);
+            checkBoxPreview.setEnabled(true);
+
         } else {
             checkBoxSingle.setSelected(false);
             checkBoxSingle.setEnabled(false);
