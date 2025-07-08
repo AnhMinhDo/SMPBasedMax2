@@ -2,133 +2,243 @@ package schneiderlab.tools.smpbasedmax2.uicomponents;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.*;
 import net.miginfocom.swing.*;
+import schneiderlab.tools.smpbasedmax2.SMPToolView;
+import schneiderlab.tools.smpbasedmax2.ThemeMode;
 import schneiderlab.tools.smpbasedmax2.uicomponents.events.*;
 /*
  * Created by JFormDesigner on Mon Jun 09 23:41:48 CEST 2025
  */
 
 
-
 /**
  * @author anhminh
  */
-public class MainDialog extends JFrame {
+public class MainDialog extends JFrame implements SMPToolView {
 	private JFrame parentFrame;
 
 	public MainDialog(JFrame parentFrame) {
 		initComponents();
 		this.parentFrame = parentFrame;
 
-		// Action to show the checkbox list for output type
-		button3.addActionListener(new ShowPopUpMenu(button3,popupMenu1));
-
-		// for toggleButton switching light and dark mode
-		toggleButton1.addActionListener(new ToggleLightDarkMode(toggleButton1, parentFrame));
-
-		// for button browse button directory
-		button1.addActionListener(new SelectDirDisplayInTextField("",
-				parentFrame,
-				textField1));
-
-		// for button browse button file
-		button2.addActionListener(new SelectFileDisplayInTextField("",
-				parentFrame,
-				textField2));
-
-		// Cancel button
-		button5.addActionListener(new CloseMainWindow(parentFrame));
-
-		// Add tooltip to textFields to view full file path
-		textField1.addMouseListener(new TooltipTextField(textField1));
-		textField2.addMouseListener(new TooltipTextField(textField2));
-
-		// SingleMode radio Button
-		radioButton1.addItemListener(new ProcessModeGroupButtonStateListener(
-				button2,
-				button1,
-				textField2,
-				textField1,
-				radioButton1,
-				radioButton3,
-				radioButton2
-
-		));
-		// Preview Mode radio Button
-		radioButton3.addItemListener(new ProcessModeGroupButtonStateListener(
-				button2,
-				button1,
-				textField2,
-				textField1,
-				radioButton1,
-				radioButton3,
-				radioButton2));
-		// Multiple File Mode radio button
-		radioButton2.addItemListener(new ProcessModeGroupButtonStateListener(
-				button2,
-				button1,
-				textField2,
-				textField1,
-				radioButton1,
-				radioButton3,
-				radioButton2
-		));
-
 	}
 
+	public JFrame getParentFrame() {
+		return parentFrame;
+	}
+
+	public JLabel getLabel1ProcessMode() {
+		return label1ProcessMode;
+	}
+
+	public JRadioButton getRadioButton1SingleFile() {
+		return radioButton1SingleFile;
+	}
+
+	public JRadioButton getRadioButton2MultipleFiles() {
+		return radioButton2MultipleFiles;
+	}
+
+	public JRadioButton getRadioButton3Preview() {
+		return radioButton3Preview;
+	}
+
+	public JToggleButton getToggleButton1LightDarkTheme() {
+		return toggleButton1LightDarkTheme;
+	}
+
+	public JLabel getLabel5References() {
+		return label5References;
+	}
+
+	public JCheckBox getCheckBox2SingleFileRef() {
+		return checkBox2SingleFileRef;
+	}
+
+	public JComboBox getComboBox3SingleFileRef() {
+		return comboBox3SingleFileRef;
+	}
+
+	public JCheckBox getCheckBox3BatchFileRef() {
+		return checkBox3BatchFileRef;
+	}
+
+	public JComboBox getComboBox4BatchFileRef() {
+		return comboBox4BatchFileRef;
+	}
+
+	public JCheckBox getCheckBox4PreviewRef() {
+		return checkBox4PreviewRef;
+	}
+
+	public JComboBox getComboBox5PreviewRef() {
+		return comboBox5PreviewRef;
+	}
+
+	public JLabel getLabel2ZStackDirection() {
+		return label2ZStackDirection;
+	}
+
+	public JComboBox<String> getComboBox1ZStackDirection() {
+		return comboBox1ZStackDirection;
+	}
+
+	public JLabel getLabel3Stiffness() {
+		return label3Stiffness;
+	}
+
+	public JSpinner getSpinner1Stiffeness() {
+		return spinner1Stiffeness;
+	}
+
+	public JLabel getLabel4FilterSize() {
+		return label4FilterSize;
+	}
+
+	public JSpinner getSpinner2FilterSize() {
+		return spinner2FilterSize;
+	}
+
+	public JSpinner getSpinner3Offset() {
+		return spinner3Offset;
+	}
+
+	public JLabel getLabel8Offset() {
+		return label8Offset;
+	}
+
+	public JLabel getLabel6Depth() {
+		return label6Depth;
+	}
+
+	public JSpinner getSpinner4Depth() {
+		return spinner4Depth;
+	}
+
+	public JLabel getLabel7DirPath() {
+		return label7DirPath;
+	}
+
+	public JButton getButton1BrowseDirPath() {
+		return button1BrowseDirPath;
+	}
+
+	public JTextField getTextField1DirPath() {
+		return textField1DirPath;
+	}
+
+	public JLabel getLabel9SingleFilePath() {
+		return label9SingleFilePath;
+	}
+
+	public JButton getButton2BrowseSingleFile() {
+		return button2BrowseSingleFile;
+	}
+
+	public JTextField getTextField2SingleFilePath() {
+		return textField2SingleFilePath;
+	}
+
+	public JLabel getLabel11ChooseOutput() {
+		return label11ChooseOutput;
+	}
+
+	public JButton getButton3SelectOutput() {
+		return button3SelectOutput;
+	}
+
+	public JTextField getTextField3Status() {
+		return textField3Status;
+	}
+
+	public JProgressBar getProgressBar1() {
+		return progressBar1;
+	}
+
+	public JButton getButton4StartProcess() {
+		return button4StartProcess;
+	}
+
+	public JButton getButton5Cancel() {
+		return button5Cancel;
+	}
+
+	public JPopupMenu getPopupMenu1Output() {
+		return popupMenu1Output;
+	}
+
+	public JCheckBoxMenuItem getCheckBoxMenuItem8MIP() {
+		return checkBoxMenuItem8MIP;
+	}
+
+	public JCheckBoxMenuItem getCheckBoxMenuItem9MIPzMap() {
+		return checkBoxMenuItem9MIPzMap;
+	}
+
+	public JCheckBoxMenuItem getCheckBoxMenuItem10SMP() {
+		return checkBoxMenuItem10SMP;
+	}
+
+	public JCheckBoxMenuItem getCheckBoxMenuItem11SMPzMap() {
+		return checkBoxMenuItem11SMPzMap;
+	}
+
+	public ButtonGroup getButtonGroup1ProcessMode() {
+		return buttonGroup1ProcessMode;
+	}
 
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
 		// Generated using JFormDesigner Educational license - Anh Minh Do
-		label1 = new JLabel();
-		radioButton1 = new JRadioButton();
-		radioButton2 = new JRadioButton();
-		radioButton3 = new JRadioButton();
-		toggleButton1 = new JToggleButton();
-		label2 = new JLabel();
-		comboBox1 = new JComboBox<>();
-		label3 = new JLabel();
-		spinner1 = new JSpinner();
-		label4 = new JLabel();
-		spinner2 = new JSpinner();
-		spinner3 = new JSpinner();
-		label8 = new JLabel();
-		label6 = new JLabel();
-		spinner4 = new JSpinner();
-		label7 = new JLabel();
-		button1 = new JButton();
-		textField1 = new JTextField();
-		label9 = new JLabel();
-		button2 = new JButton();
-		textField2 = new JTextField();
-		checkBox1 = new JCheckBox();
-		label10 = new JLabel();
-		comboBox2 = new JComboBox();
-		label11 = new JLabel();
-		button3 = new JButton();
+		label1ProcessMode = new JLabel();
+		radioButton1SingleFile = new JRadioButton();
+		separator1 = new JSeparator();
+		radioButton2MultipleFiles = new JRadioButton();
+		separator2 = new JSeparator();
+		radioButton3Preview = new JRadioButton();
+		toggleButton1LightDarkTheme = new JToggleButton();
+		label5References = new JLabel();
+		checkBox2SingleFileRef = new JCheckBox();
+		comboBox3SingleFileRef = new JComboBox();
+		checkBox3BatchFileRef = new JCheckBox();
+		comboBox4BatchFileRef = new JComboBox();
+		checkBox4PreviewRef = new JCheckBox();
+		comboBox5PreviewRef = new JComboBox();
+		label2ZStackDirection = new JLabel();
+		comboBox1ZStackDirection = new JComboBox<>();
+		label3Stiffness = new JLabel();
+		spinner1Stiffeness = new JSpinner();
+		label4FilterSize = new JLabel();
+		spinner2FilterSize = new JSpinner();
+		spinner3Offset = new JSpinner();
+		label8Offset = new JLabel();
+		label6Depth = new JLabel();
+		spinner4Depth = new JSpinner();
+		label7DirPath = new JLabel();
+		button1BrowseDirPath = new JButton();
+		textField1DirPath = new JTextField();
+		label9SingleFilePath = new JLabel();
+		button2BrowseSingleFile = new JButton();
+		textField2SingleFilePath = new JTextField();
+		label11ChooseOutput = new JLabel();
+		button3SelectOutput = new JButton();
+		textField3Status = new JTextField();
 		progressBar1 = new JProgressBar();
-		button4 = new JButton();
-		button5 = new JButton();
-		popupMenu1 = new JPopupMenu();
-		checkBoxMenuItem8 = new JCheckBoxMenuItem();
-		checkBoxMenuItem9 = new JCheckBoxMenuItem();
-		checkBoxMenuItem10 = new JCheckBoxMenuItem();
-		checkBoxMenuItem11 = new JCheckBoxMenuItem();
-		checkBoxMenuItem12 = new JCheckBoxMenuItem();
-		checkBoxMenuItem13 = new JCheckBoxMenuItem();
-		buttonGroup1 = new ButtonGroup();
+		button4StartProcess = new JButton();
+		button5Cancel = new JButton();
+		popupMenu1Output = new JPopupMenu();
+		checkBoxMenuItem8MIP = new JCheckBoxMenuItem();
+		checkBoxMenuItem9MIPzMap = new JCheckBoxMenuItem();
+		checkBoxMenuItem10SMP = new JCheckBoxMenuItem();
+		checkBoxMenuItem11SMPzMap = new JCheckBoxMenuItem();
+		buttonGroup1ProcessMode = new ButtonGroup();
 
 		//======== this ========
 		Container contentPane = getContentPane();
 		contentPane.setLayout(new MigLayout(
 			"hidemode 3,align center top",
 			// columns
-			"[fill]" +
-			"[fill]" +
-			"[fill]" +
-			"[fill]" +
-			"[fill]" +
-			"[fill]" +
 			"[fill]" +
 			"[fill]" +
 			"[fill]" +
@@ -147,209 +257,242 @@ public class MainDialog extends JFrame {
 			"[]" +
 			"[]" +
 			"[]" +
+			"[]" +
 			"[]"));
 
-		//---- label1 ----
-		label1.setText("Process Mode:");
-		contentPane.add(label1, "cell 0 0");
+		//---- label1ProcessMode ----
+		label1ProcessMode.setText("Process Mode:");
+		contentPane.add(label1ProcessMode, "cell 0 0");
 
-		//---- radioButton1 ----
-		radioButton1.setText("SINGLE_FILE");
-		radioButton1.setSelected(true);
-		radioButton1.setHorizontalAlignment(SwingConstants.CENTER);
-		radioButton1.setIconTextGap(20);
-		contentPane.add(radioButton1, "cell 1 0");
+		//---- radioButton1SingleFile ----
+		radioButton1SingleFile.setText("SINGLE_FILE");
+		radioButton1SingleFile.setSelected(true);
+		radioButton1SingleFile.setHorizontalAlignment(SwingConstants.CENTER);
+		radioButton1SingleFile.setIconTextGap(20);
+		contentPane.add(radioButton1SingleFile, "cell 1 0");
 
-		//---- radioButton2 ----
-		radioButton2.setText("MULTIPLE_FILES");
-		radioButton2.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(radioButton2, "cell 2 0");
+		//---- separator1 ----
+		separator1.setOrientation(SwingConstants.VERTICAL);
+		contentPane.add(separator1, "cell 2 0 1 2,growy");
 
-		//---- radioButton3 ----
-		radioButton3.setText("PREVIEW");
-		radioButton3.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(radioButton3, "cell 3 0");
+		//---- radioButton2MultipleFiles ----
+		radioButton2MultipleFiles.setText("MULTIPLE_FILES");
+		radioButton2MultipleFiles.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(radioButton2MultipleFiles, "cell 3 0");
 
-		//---- toggleButton1 ----
-		toggleButton1.setIcon(new ImageIcon(getClass().getResource("/iconimages/light_mode_36dp_000000_FILL0_wght400_GRAD0_opsz40.png")));
-		toggleButton1.setSelectedIcon(new ImageIcon(getClass().getResource("/iconimages/dark_mode_36dp_FFFFFF_FILL0_wght400_GRAD0_opsz40.png")));
-		toggleButton1.setBorderPainted(false);
-		contentPane.add(toggleButton1, "cell 4 0");
+		//---- separator2 ----
+		separator2.setOrientation(SwingConstants.VERTICAL);
+		contentPane.add(separator2, "cell 4 0 1 2,growy");
 
-		//---- label2 ----
-		label2.setText("Direction of Z stack: ");
-		contentPane.add(label2, "cell 0 1 3 1,alignx right,growx 0");
+		//---- radioButton3Preview ----
+		radioButton3Preview.setText("PREVIEW");
+		radioButton3Preview.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(radioButton3Preview, "cell 5 0");
 
-		//---- comboBox1 ----
-		comboBox1.setModel(new DefaultComboBoxModel<>(new String[] {
+		//---- toggleButton1LightDarkTheme ----
+		toggleButton1LightDarkTheme.setIcon(new ImageIcon(getClass().getResource("/iconimages/light_mode_26dp_000000_FILL0_wght400_GRAD0_opsz24.png")));
+		toggleButton1LightDarkTheme.setSelectedIcon(new ImageIcon(getClass().getResource("/iconimages/dark_mode_26dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png")));
+		toggleButton1LightDarkTheme.setBorderPainted(false);
+		contentPane.add(toggleButton1LightDarkTheme, "cell 6 0");
+
+		//---- label5References ----
+		label5References.setText("References:");
+		contentPane.add(label5References, "cell 0 1");
+
+		//---- checkBox2SingleFileRef ----
+		checkBox2SingleFileRef.setEnabled(false);
+		contentPane.add(checkBox2SingleFileRef, "cell 1 1,alignx left,growx 0");
+
+		//---- comboBox3SingleFileRef ----
+		comboBox3SingleFileRef.setEnabled(false);
+		contentPane.add(comboBox3SingleFileRef, "cell 1 1");
+
+		//---- checkBox3BatchFileRef ----
+		checkBox3BatchFileRef.setEnabled(false);
+		contentPane.add(checkBox3BatchFileRef, "cell 3 1,alignx left,growx 0");
+
+		//---- comboBox4BatchFileRef ----
+		comboBox4BatchFileRef.setEnabled(false);
+		contentPane.add(comboBox4BatchFileRef, "cell 3 1");
+
+		//---- checkBox4PreviewRef ----
+		checkBox4PreviewRef.setEnabled(false);
+		contentPane.add(checkBox4PreviewRef, "cell 5 1,alignx left,growx 0");
+
+		//---- comboBox5PreviewRef ----
+		comboBox5PreviewRef.setEnabled(false);
+		contentPane.add(comboBox5PreviewRef, "cell 5 1");
+
+		//---- label2ZStackDirection ----
+		label2ZStackDirection.setText("Direction of Z stack: ");
+		contentPane.add(label2ZStackDirection, "cell 0 2 4 1,alignx right,growx 0");
+
+		//---- comboBox1ZStackDirection ----
+		comboBox1ZStackDirection.setModel(new DefaultComboBoxModel<>(new String[] {
 			"IN",
 			"OUT"
 		}));
-		contentPane.add(comboBox1, "cell 3 1,alignx left,growx 0");
+		contentPane.add(comboBox1ZStackDirection, "cell 5 2,alignx left,growx 0");
 
-		//---- label3 ----
-		label3.setText("Enter Envelope stiffness [pixels]:");
-		label3.setLabelFor(spinner1);
-		contentPane.add(label3, "cell 0 2 3 1,alignx right,growx 0");
+		//---- label3Stiffness ----
+		label3Stiffness.setText("Envelope stiffness [pixels]:");
+		label3Stiffness.setLabelFor(spinner1Stiffeness);
+		contentPane.add(label3Stiffness, "cell 0 3 4 1,alignx right,growx 0");
 
-		//---- spinner1 ----
-		spinner1.setModel(new SpinnerNumberModel(0, 0, null, 1));
-		contentPane.add(spinner1, "cell 3 2");
+		//---- spinner1Stiffeness ----
+		spinner1Stiffeness.setModel(new SpinnerNumberModel(60, 0, null, 1));
+		contentPane.add(spinner1Stiffeness, "cell 5 3");
 
-		//---- label4 ----
-		label4.setText("Enter final Filter size [pixel]:");
-		label4.setLabelFor(spinner2);
-		contentPane.add(label4, "cell 0 3 3 1,alignx right,growx 0");
+		//---- label4FilterSize ----
+		label4FilterSize.setText("Filter size [pixel]:");
+		label4FilterSize.setLabelFor(spinner2FilterSize);
+		contentPane.add(label4FilterSize, "cell 0 4 4 1,alignx right,growx 0");
 
-		//---- spinner2 ----
-		spinner2.setModel(new SpinnerNumberModel(0, 0, null, 1));
-		contentPane.add(spinner2, "cell 3 3");
+		//---- spinner2FilterSize ----
+		spinner2FilterSize.setModel(new SpinnerNumberModel(30, 0, null, 1));
+		contentPane.add(spinner2FilterSize, "cell 5 4");
 
-		//---- spinner3 ----
-		spinner3.setModel(new SpinnerNumberModel(0, 0, null, 1));
-		contentPane.add(spinner3, "cell 3 4");
+		//---- spinner3Offset ----
+		spinner3Offset.setModel(new SpinnerNumberModel(0, 0, null, 1));
+		contentPane.add(spinner3Offset, "cell 5 5");
 
-		//---- label8 ----
-		label8.setText("Offset-N planes above(+) or below(-) blanket [pixels]:");
-		contentPane.add(label8, "cell 0 4 3 1,alignx right,growx 0");
+		//---- label8Offset ----
+		label8Offset.setText("Offset [pixels]:");
+		label8Offset.setToolTipText("Offset: number of planes above(+) or below(-) blanket [pixels]");
+		contentPane.add(label8Offset, "cell 0 5 4 1,alignx right,growx 0");
 
-		//---- label6 ----
-		label6.setText("Depth:MIP for N pixels into blanket [pixels]:");
-		label6.setLabelFor(spinner4);
-		contentPane.add(label6, "cell 0 5 3 1,alignx right,growx 0");
+		//---- label6Depth ----
+		label6Depth.setText("Depth [pixels]:");
+		label6Depth.setLabelFor(spinner4Depth);
+		label6Depth.setToolTipText("Depth:MIP for N pixels into blanket [pixels]");
+		contentPane.add(label6Depth, "cell 0 6 4 1,alignx right,growx 0");
 
-		//---- spinner4 ----
-		spinner4.setModel(new SpinnerNumberModel(0, 0, null, 1));
-		contentPane.add(spinner4, "cell 3 5");
+		//---- spinner4Depth ----
+		spinner4Depth.setModel(new SpinnerNumberModel(0, 0, null, 1));
+		contentPane.add(spinner4Depth, "cell 5 6");
 
-		//---- label7 ----
-		label7.setText("Directory for MULTIPLE_FILES:");
-		contentPane.add(label7, "cell 0 6 2 1,alignx right,growx 0");
+		//---- label7DirPath ----
+		label7DirPath.setText("Directory for MULTIPLE_FILES:");
+		contentPane.add(label7DirPath, "cell 0 7 2 1,alignx right,growx 0");
 
-		//---- button1 ----
-		button1.setText("Browse");
-		button1.setEnabled(false);
-		contentPane.add(button1, "cell 2 6");
+		//---- button1BrowseDirPath ----
+		button1BrowseDirPath.setText("Browse");
+		button1BrowseDirPath.setEnabled(false);
+		contentPane.add(button1BrowseDirPath, "cell 3 7");
 
-		//---- textField1 ----
-		textField1.setEnabled(false);
-		textField1.setEditable(false);
-		contentPane.add(textField1, "cell 3 6");
+		//---- textField1DirPath ----
+		textField1DirPath.setEnabled(false);
+		textField1DirPath.setEditable(false);
+		contentPane.add(textField1DirPath, "cell 5 7");
 
-		//---- label9 ----
-		label9.setText("File path for SINGLE FILE:");
-		contentPane.add(label9, "cell 0 7 2 1,alignx right,growx 0");
+		//---- label9SingleFilePath ----
+		label9SingleFilePath.setText("File path for SINGLE FILE:");
+		contentPane.add(label9SingleFilePath, "cell 0 8 2 1,alignx right,growx 0");
 
-		//---- button2 ----
-		button2.setText("Browse");
-		contentPane.add(button2, "cell 2 7");
+		//---- button2BrowseSingleFile ----
+		button2BrowseSingleFile.setText("Browse");
+		contentPane.add(button2BrowseSingleFile, "cell 3 8");
 
-		//---- textField2 ----
-		textField2.setEditable(false);
-		contentPane.add(textField2, "cell 3 7");
+		//---- textField2SingleFilePath ----
+		textField2SingleFilePath.setEditable(false);
+		contentPane.add(textField2SingleFilePath, "cell 5 8");
 
-		//---- checkBox1 ----
-		checkBox1.setText("Project Additional Channels:");
-		contentPane.add(checkBox1, "cell 0 8 2 1");
+		//---- label11ChooseOutput ----
+		label11ChooseOutput.setText("Choose Output File type:");
+		contentPane.add(label11ChooseOutput, "cell 0 9 4 1,alignx right,growx 0");
 
-		//---- label10 ----
-		label10.setText("Select Reference");
-		contentPane.add(label10, "cell 2 8");
-		contentPane.add(comboBox2, "cell 3 8");
+		//---- button3SelectOutput ----
+		button3SelectOutput.setText("select output");
+		button3SelectOutput.setComponentPopupMenu(popupMenu1Output);
+		contentPane.add(button3SelectOutput, "cell 5 9");
 
-		//---- label11 ----
-		label11.setText("Choose Output File type:");
-		contentPane.add(label11, "cell 0 9 3 1,alignx right,growx 0");
-
-		//---- button3 ----
-		button3.setText("select output");
-		button3.setContentAreaFilled(false);
-		contentPane.add(button3, "cell 3 9");
+		//---- textField3Status ----
+		textField3Status.setEditable(false);
+		contentPane.add(textField3Status, "cell 0 10");
 		contentPane.add(progressBar1, "cell 1 10");
 
-		//---- button4 ----
-		button4.setText("Start Process");
-		contentPane.add(button4, "cell 2 10");
+		//---- button4StartProcess ----
+		button4StartProcess.setText("Start Process");
+		contentPane.add(button4StartProcess, "cell 3 10");
 
-		//---- button5 ----
-		button5.setText("Cancel");
-		contentPane.add(button5, "cell 3 10");
+		//---- button5Cancel ----
+		button5Cancel.setText("Cancel");
+		contentPane.add(button5Cancel, "cell 5 10");
 		pack();
 		setLocationRelativeTo(getOwner());
 
-		//======== popupMenu1 ========
+		//======== popupMenu1Output ========
 		{
+			popupMenu1Output.setBorder(new EtchedBorder());
 
-			//---- checkBoxMenuItem8 ----
-			checkBoxMenuItem8.setText("MIP");
-			popupMenu1.add(checkBoxMenuItem8);
+			//---- checkBoxMenuItem8MIP ----
+			checkBoxMenuItem8MIP.setText("MIP");
+			popupMenu1Output.add(checkBoxMenuItem8MIP);
 
-			//---- checkBoxMenuItem9 ----
-			checkBoxMenuItem9.setText("MIP z map");
-			popupMenu1.add(checkBoxMenuItem9);
+			//---- checkBoxMenuItem9MIPzMap ----
+			checkBoxMenuItem9MIPzMap.setText("MIP z map");
+			popupMenu1Output.add(checkBoxMenuItem9MIPzMap);
 
-			//---- checkBoxMenuItem10 ----
-			checkBoxMenuItem10.setText("SMP ");
-			popupMenu1.add(checkBoxMenuItem10);
+			//---- checkBoxMenuItem10SMP ----
+			checkBoxMenuItem10SMP.setText("SMP ");
+			checkBoxMenuItem10SMP.setSelected(true);
+			popupMenu1Output.add(checkBoxMenuItem10SMP);
 
-			//---- checkBoxMenuItem11 ----
-			checkBoxMenuItem11.setText("SMP z map");
-			popupMenu1.add(checkBoxMenuItem11);
-
-			//---- checkBoxMenuItem12 ----
-			checkBoxMenuItem12.setText("depth-adjusted SMP ");
-			popupMenu1.add(checkBoxMenuItem12);
-
-			//---- checkBoxMenuItem13 ----
-			checkBoxMenuItem13.setText("depth-adjusted SMP z map");
-			popupMenu1.add(checkBoxMenuItem13);
+			//---- checkBoxMenuItem11SMPzMap ----
+			checkBoxMenuItem11SMPzMap.setText("SMP z map");
+			popupMenu1Output.add(checkBoxMenuItem11SMPzMap);
 		}
 
-		//---- buttonGroup1 ----
-		buttonGroup1.add(radioButton1);
-		buttonGroup1.add(radioButton2);
-		buttonGroup1.add(radioButton3);
+		//---- buttonGroup1ProcessMode ----
+		buttonGroup1ProcessMode.add(radioButton1SingleFile);
+		buttonGroup1ProcessMode.add(radioButton2MultipleFiles);
+		buttonGroup1ProcessMode.add(radioButton3Preview);
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
 	}
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
 	// Generated using JFormDesigner Educational license - Anh Minh Do
-	private JLabel label1;
-	private JRadioButton radioButton1;
-	private JRadioButton radioButton2;
-	private JRadioButton radioButton3;
-	private JToggleButton toggleButton1;
-	private JLabel label2;
-	private JComboBox<String> comboBox1;
-	private JLabel label3;
-	private JSpinner spinner1;
-	private JLabel label4;
-	private JSpinner spinner2;
-	private JSpinner spinner3;
-	private JLabel label8;
-	private JLabel label6;
-	private JSpinner spinner4;
-	private JLabel label7;
-	private JButton button1;
-	private JTextField textField1;
-	private JLabel label9;
-	private JButton button2;
-	private JTextField textField2;
-	private JCheckBox checkBox1;
-	private JLabel label10;
-	private JComboBox comboBox2;
-	private JLabel label11;
-	private JButton button3;
+	private JLabel label1ProcessMode;
+	private JRadioButton radioButton1SingleFile;
+	private JSeparator separator1;
+	private JRadioButton radioButton2MultipleFiles;
+	private JSeparator separator2;
+	private JRadioButton radioButton3Preview;
+	private JToggleButton toggleButton1LightDarkTheme;
+	private JLabel label5References;
+	private JCheckBox checkBox2SingleFileRef;
+	private JComboBox comboBox3SingleFileRef;
+	private JCheckBox checkBox3BatchFileRef;
+	private JComboBox comboBox4BatchFileRef;
+	private JCheckBox checkBox4PreviewRef;
+	private JComboBox comboBox5PreviewRef;
+	private JLabel label2ZStackDirection;
+	private JComboBox<String> comboBox1ZStackDirection;
+	private JLabel label3Stiffness;
+	private JSpinner spinner1Stiffeness;
+	private JLabel label4FilterSize;
+	private JSpinner spinner2FilterSize;
+	private JSpinner spinner3Offset;
+	private JLabel label8Offset;
+	private JLabel label6Depth;
+	private JSpinner spinner4Depth;
+	private JLabel label7DirPath;
+	private JButton button1BrowseDirPath;
+	private JTextField textField1DirPath;
+	private JLabel label9SingleFilePath;
+	private JButton button2BrowseSingleFile;
+	private JTextField textField2SingleFilePath;
+	private JLabel label11ChooseOutput;
+	private JButton button3SelectOutput;
+	private JTextField textField3Status;
 	private JProgressBar progressBar1;
-	private JButton button4;
-	private JButton button5;
-	private JPopupMenu popupMenu1;
-	private JCheckBoxMenuItem checkBoxMenuItem8;
-	private JCheckBoxMenuItem checkBoxMenuItem9;
-	private JCheckBoxMenuItem checkBoxMenuItem10;
-	private JCheckBoxMenuItem checkBoxMenuItem11;
-	private JCheckBoxMenuItem checkBoxMenuItem12;
-	private JCheckBoxMenuItem checkBoxMenuItem13;
-	private ButtonGroup buttonGroup1;
+	private JButton button4StartProcess;
+	private JButton button5Cancel;
+	private JPopupMenu popupMenu1Output;
+	private JCheckBoxMenuItem checkBoxMenuItem8MIP;
+	private JCheckBoxMenuItem checkBoxMenuItem9MIPzMap;
+	private JCheckBoxMenuItem checkBoxMenuItem10SMP;
+	private JCheckBoxMenuItem checkBoxMenuItem11SMPzMap;
+	private ButtonGroup buttonGroup1ProcessMode;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
