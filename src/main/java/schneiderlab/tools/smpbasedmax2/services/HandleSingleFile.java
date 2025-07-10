@@ -51,6 +51,38 @@ public class HandleSingleFile {
         return depth==0 ? this.projectedSMPImage : projectedSMPMIPImage;
     }
 
+    public ImagePlus getMIPOutput() {
+        if(this.projectedImage == null){
+            throw new IllegalStateException("Image not processed yet.");
+        } else{
+            return projectedImage;
+        }
+    }
+
+    public ImagePlus getMIPzMapOutput(){
+        if(this.zMap == null){
+            throw new IllegalStateException("Image not processed yet.");
+        } else{
+            return zMap;
+        }
+    }
+
+    public ImagePlus getSMPOutput(){
+        if(this.projectedSMPImage == null){
+            throw new IllegalStateException("Image not processed yet.");
+        } else{
+            return depth==0 ? this.projectedSMPImage : projectedSMPMIPImage;
+        }
+    }
+
+    public ImagePlus getSMPzMapOutput(){
+        if(this.smpZmap == null){
+            throw new IllegalStateException("Image not processed yet.");
+        } else{
+            return depth==0 ? this.smpZmap : this.smpMipZmap;
+        }
+    }
+
 //    public void setFilePath(String filePath) {
 //        this.filePath = filePath;
 //    }
