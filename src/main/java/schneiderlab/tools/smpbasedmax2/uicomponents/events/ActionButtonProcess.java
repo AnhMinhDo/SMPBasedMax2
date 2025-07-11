@@ -1,8 +1,10 @@
 package schneiderlab.tools.smpbasedmax2.uicomponents.events;
 
+import schneiderlab.tools.smpbasedmax2.OutputTypeName;
 import schneiderlab.tools.smpbasedmax2.ProcessingMode;
 import schneiderlab.tools.smpbasedmax2.ZStackDirection;
 import schneiderlab.tools.smpbasedmax2.uicomponents.MainDialog;
+import schneiderlab.tools.smpbasedmax2.uicomponents.workers.ProcessMultipleFileWorker;
 import schneiderlab.tools.smpbasedmax2.uicomponents.workers.ProcessPreviewFileWorker;
 import schneiderlab.tools.smpbasedmax2.uicomponents.workers.ProcessSingleFileWorker;
 import schneiderlab.tools.smpbasedmax2.uicomponents.workers.ProcessingWorker;
@@ -10,6 +12,9 @@ import schneiderlab.tools.smpbasedmax2.uicomponents.workers.ProcessingWorker;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashSet;
 
 public class ActionButtonProcess implements ActionListener {
     private JTextField statusBar;
@@ -20,6 +25,7 @@ public class ActionButtonProcess implements ActionListener {
     private JSpinner offset;
     private JSpinner depth;
     private JTextField filePathTextField;
+    private JTextField directoryPathTextField;
     private JCheckBox otherChannelProjectionSingleMode;
     private JComboBox comboBoxSingleMode;
     private JCheckBox otherChannelProjectionBatchMode;
@@ -33,6 +39,8 @@ public class ActionButtonProcess implements ActionListener {
     private MainDialog mainDialogView;
     private ProcessingMode processingMode;
     private ZStackDirection zStackDirection;
+    private HashSet<OutputTypeName> outputType;
+    private Path dirPath;
 
     public ActionButtonProcess(JTextField statusBar,
                                ButtonGroup processingModeRadioButtonGroup,
@@ -42,6 +50,7 @@ public class ActionButtonProcess implements ActionListener {
                                JSpinner offset,
                                JSpinner depth,
                                JTextField filePathTextField,
+                               JTextField directoryPathTextField,
                                JCheckBox otherChannelProjectionSingleMode,
                                JComboBox comboBoxSingleMode,
                                JCheckBox otherChannelProjectionBatchMode,
@@ -59,6 +68,7 @@ public class ActionButtonProcess implements ActionListener {
         this.offset = offset;
         this.depth = depth;
         this.filePathTextField = filePathTextField;
+        this.directoryPathTextField = directoryPathTextField;
         this.otherChannelProjectionSingleMode = otherChannelProjectionSingleMode;
         this.comboBoxSingleMode = comboBoxSingleMode;
         this.otherChannelProjectionBatchMode = otherChannelProjectionBatchMode;
@@ -68,6 +78,7 @@ public class ActionButtonProcess implements ActionListener {
         this.progressBar = progressBar;
         this.parent = parent;
         this.mainDialogView = mainDialogView;
+        this.dirPath= Paths.get(directoryPathTextField.getText());
     }
 
     @Override
@@ -76,6 +87,9 @@ public class ActionButtonProcess implements ActionListener {
         setzStackDirection();
         progressBar.setValue(0);
         statusBar.setText("processing...");
+        // GET THE SELECTED OUTPUT
+        this.outputType=getSelectedOutputType();
+        // SINGLE FILE MODE
         if (processingMode==ProcessingMode.SINGLE_FILE){
             this.hasManyChannels = otherChannelProjectionSingleMode.isSelected();
             this.referenceChannelIdx = comboBoxSingleMode.getSelectedIndex();
@@ -89,7 +103,9 @@ public class ActionButtonProcess implements ActionListener {
                             statusBar,
                             hasManyChannels,
                             referenceChannelIdx,
-                            progressBar);
+                            progressBar,
+                            (int)mainDialogView.getComboBox3SingleFileRef().getItemCount(),
+                            outputType);
             processSingleFileWorker.addPropertyChangeListener(evt ->
             {
                 if ("progress".equals(evt.getPropertyName())){
@@ -127,12 +143,34 @@ public class ActionButtonProcess implements ActionListener {
         } else if (processingMode==ProcessingMode.MULTIPLE_FILES) {
             this.hasManyChannels = otherChannelProjectionBatchMode.isSelected();
             this.referenceChannelIdx = comboBoxBatchMode.getSelectedIndex();
-            // TODO: CALL THE BATCH WORKER
-            statusBar.setText("Feature has not been implemented!");
+            this.dirPath= Paths.get(directoryPathTextField.getText());
+            ProcessMultipleFileWorker processMultipleFileWorker = new ProcessMultipleFileWorker(
+                    this.dirPath,
+                    outputType,
+                    (int)stiffness.getValue(),
+                    (int)filterSize.getValue(),
+                    zStackDirection,
+                    (int) offset.getValue(),
+                    (int) depth.getValue(),
+                    hasManyChannels,
+                    referenceChannelIdx,
+                    statusBar,
+                    progressBar,
+                    (int)mainDialogView.getComboBox4BatchFileRef().getItemCount()
+            );
+            processMultipleFileWorker.addPropertyChangeListener(evt ->
+            {
+                if ("progress".equals(evt.getPropertyName())){
+                    int value = (int) evt.getNewValue();
+                    progressBar.setValue(value);
+                    progressBar.setToolTipText(value + "%");
+                }
+            });
+            processMultipleFileWorker.execute();
         }
     }
 
-    public void setzStackDirection(){
+    private void setzStackDirection(){
         String zStackDirectionstring = (String) zStackDirectionCombobox.getSelectedItem();
         if(zStackDirectionstring.equals("IN")){
             zStackDirection = ZStackDirection.IN;
@@ -141,7 +179,7 @@ public class ActionButtonProcess implements ActionListener {
         }
     }
 
-    public void setProcessingMode(){
+    private void setProcessingMode(){
         String processingModeString = processingModeRadioButtonGroup.getSelection().getActionCommand();
         if(processingModeString.equals("SINGLE_FILE")){
             processingMode = ProcessingMode.SINGLE_FILE;
@@ -150,6 +188,23 @@ public class ActionButtonProcess implements ActionListener {
         } else if (processingModeString.equals("MULTIPLE_FILES")) {
             processingMode = ProcessingMode.MULTIPLE_FILES;
         }
+    }
+
+    private HashSet<OutputTypeName> getSelectedOutputType(){
+        HashSet<OutputTypeName> outputType = new HashSet<>();
+        if (mainDialogView.getCheckBoxMenuItem8MIP().isSelected()){
+            outputType.add(OutputTypeName.MIP);
+        }
+        if (mainDialogView.getCheckBoxMenuItem9MIPzMap().isSelected()){
+            outputType.add(OutputTypeName.MIP_ZMAP);
+        }
+        if (mainDialogView.getCheckBoxMenuItem10SMP().isSelected()){
+            outputType.add(OutputTypeName.SMP);
+        }
+        if (mainDialogView.getCheckBoxMenuItem11SMPzMap().isSelected()){
+            outputType.add(OutputTypeName.SMP_ZMAP);
+        }
+        return outputType;
     }
 
 }
