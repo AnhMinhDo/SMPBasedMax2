@@ -12,14 +12,6 @@ import java.nio.file.Path;
 import java.util.HashSet;
 
 public class HandleSingleFileNoChannelSaveOutput {
-    /* TODO: this class takes in 1 imagePlus object,
-         1 path object, 1 set for output type,
-        parameters for the process, process the file
-        and save the desired output according to the provided output set,
-         including method to get the main output if required,
-         for saving output: check all the available value of OutputType,
-         if any exist, perform the saving process
-          */
     private Path inputPath;
     private ImagePlus inputImage;
     private HashSet<OutputTypeName> outputTypeSet;
@@ -54,9 +46,30 @@ public class HandleSingleFileNoChannelSaveOutput {
         this.depth = depth;
     }
 
-    public void process(){
+    public void processAndSaveOutput(){
         performProcessing();
         saveOutputToFile();
+    }
+
+    public ImagePlus process(){
+        performProcessing();
+        return getSMPOutput();
+    }
+
+    public ImagePlus getMIPOutput(){
+        if(this.MIPImage == null){
+            throw new IllegalStateException("Image not processed yet.");
+        } else{
+            return MIPImage;
+        }
+    }
+
+    public ImagePlus getMIPzMapOutput(){
+        if(this.zMap == null){
+            throw new IllegalStateException("Image not processed yet.");
+        } else{
+            return zMap;
+        }
     }
 
     public ImagePlus getSMPOutput(){
@@ -72,6 +85,14 @@ public class HandleSingleFileNoChannelSaveOutput {
             throw new IllegalStateException("Image not processed yet.");
         } else{
             return depth==0 ? this.smpZmap : this.smpMipZmap;
+        }
+    }
+
+    public float[] getEnvMaxzValues(){
+        if(this.envMaxzValues == null){
+            throw new IllegalStateException("Image not processed yet.");
+        } else{
+            return this.envMaxzValues;
         }
     }
 
@@ -94,14 +115,18 @@ public class HandleSingleFileNoChannelSaveOutput {
         this.smpMipZmap = smpMipProjector.getZmap();
     }
 
-    private void saveOutputToFile(){
-        for(OutputTypeName outputTypeName: outputTypeSet){
-            if(outputTypeName == null) continue;
-            switch (outputTypeName){
-                case MIP: saveMIP();
-                case MIP_ZMAP: saveMIPZMap();
-                case SMP: saveSMP();
-                case SMP_ZMAP: saveSMPZMap();
+    private void saveOutputToFile() {
+        for (OutputTypeName outputType : outputTypeSet) {
+            if (outputType == null) continue;
+
+            if (outputType == OutputTypeName.MIP) {
+                saveMIP();
+            } else if (outputType == OutputTypeName.MIP_ZMAP) {
+                saveMIPZMap();
+            } else if (outputType == OutputTypeName.SMP) {
+                saveSMP();
+            } else if (outputType == OutputTypeName.SMP_ZMAP) {
+                saveSMPZMap();
             }
         }
     }
