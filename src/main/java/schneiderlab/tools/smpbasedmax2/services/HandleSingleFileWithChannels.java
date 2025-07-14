@@ -1,10 +1,12 @@
 package schneiderlab.tools.smpbasedmax2.services;
 
 
+import ij.CompositeImage;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.plugin.ChannelSplitter;
 import ij.plugin.RGBStackMerge;
+import ij.process.LUT;
 import schneiderlab.tools.smpbasedmax2.OutputTypeName;
 import schneiderlab.tools.smpbasedmax2.ZStackDirection;
 import schneiderlab.tools.smpbasedmax2.corecomputation.ManifoldBypassProjection;
@@ -28,7 +30,7 @@ public class HandleSingleFileWithChannels {
     private int depth;
     private ImagePlus output;
     private int referenceIndx;
-    private  ImagePlus merged;
+    private CompositeImage merged;
 
 
     public HandleSingleFileWithChannels(ImagePlus input,
@@ -68,7 +70,22 @@ public class HandleSingleFileWithChannels {
                 outputChannels[i] = outputChannel;
             }
         }
-        merged = RGBStackMerge.mergeChannels(outputChannels,true);
+        ImagePlus rawMerged = RGBStackMerge.mergeChannels(outputChannels,true);
+        if (!(input instanceof CompositeImage)) {
+            input = new CompositeImage(input, CompositeImage.COLOR);
+        }
+        LUT[] luts = ((CompositeImage) input).getLuts();
+
+        // Ensure merged is CompositeImage to set LUTs
+        if (!(rawMerged instanceof CompositeImage)) {
+            rawMerged = new CompositeImage(rawMerged, CompositeImage.COLOR);
+        }
+
+        // Apply LUTs from inputImage to merged channels
+        merged = (CompositeImage) rawMerged;
+        for (int c = 1; c <= merged.getNChannels(); c++) {
+            merged.setChannelLut(luts[c - 1], c);
+        }
     }
 
         private static ImagePlus processOtherChannel (ImagePlus otherChannel,
