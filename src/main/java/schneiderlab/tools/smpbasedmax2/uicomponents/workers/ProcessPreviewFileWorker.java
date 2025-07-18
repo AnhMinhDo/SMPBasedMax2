@@ -119,6 +119,7 @@ public class ProcessPreviewFileWorker extends SwingWorker<Void, Void> {
         previewDialogView.getSpinner3Offset().setValue(mainDialogView.getSpinner3Offset().getValue());
         previewDialogView.getSpinner4Depth().setValue(mainDialogView.getSpinner4Depth().getValue());
         // show the result image
+        result.setTitle(inputImage.getTitle());
         result.show();
         // create the PreviewDialog controller
         PreviewDialogController previewDialogController = new PreviewDialogController(previewDialogView,
@@ -130,7 +131,7 @@ public class ProcessPreviewFileWorker extends SwingWorker<Void, Void> {
                 result,
                 inputImage);
         // show the previewDialog
-        previewDialogView.setTitle(result.getTitle());
+        previewDialogView.setTitle(inputImage.getTitle());
         previewDialogView.pack();
         previewDialogView.setVisible(true);
     }
