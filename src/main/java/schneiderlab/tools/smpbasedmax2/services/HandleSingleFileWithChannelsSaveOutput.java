@@ -171,7 +171,7 @@ public class HandleSingleFileWithChannelsSaveOutput {
     }
 
     private void saveMIPZMap(){
-        SmpBasedMaxUtil.savePostProcessImagePlus(this.zMap,
+        SmpBasedMaxUtil.savePostProcessImagePlusZmap(this.zMap,
                 OutputTypeName.MIP_ZMAP,
                 inputPath,
                 this.stiffness,
@@ -202,7 +202,7 @@ public class HandleSingleFileWithChannelsSaveOutput {
 
     private void saveSMPZMap(){
         if(depth == 0){
-            SmpBasedMaxUtil.savePostProcessImagePlus(this.smpZmap,
+            SmpBasedMaxUtil.savePostProcessImagePlusZmap(this.smpZmap,
                     OutputTypeName.SMP_ZMAP,
                     inputPath,
                     this.stiffness,
@@ -210,7 +210,7 @@ public class HandleSingleFileWithChannelsSaveOutput {
                     this.offset,
                     this.depth);
         } else {
-            SmpBasedMaxUtil.savePostProcessImagePlus(this.smpZmap,
+            SmpBasedMaxUtil.savePostProcessImagePlusZmap(this.smpZmap,
                     OutputTypeName.SMPbasedMIP_ZMAP,
                     inputPath,
                     this.stiffness,

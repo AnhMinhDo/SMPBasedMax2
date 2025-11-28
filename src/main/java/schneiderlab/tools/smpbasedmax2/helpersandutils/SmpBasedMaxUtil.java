@@ -226,6 +226,26 @@ public class SmpBasedMaxUtil {
         projectedImg8bit.saveAsTiff(outputFullFilePath);
         }
 
+    public static void savePostProcessImagePlusZmap(ImagePlus Zmap,
+                                                OutputTypeName outputTypeName,
+                                                Path fileNamePath,
+                                                int stiffness,
+                                                int filterSize,
+                                                int offset,
+                                                int depth) {
+        // get the parent directory
+        String resultDir = fileNamePath.getParent().toAbsolutePath().toString();
+        String fileName = extractFilename(fileNamePath.getFileName().toString());
+        // saving the image
+        FileSaver filesaver = new FileSaver(Zmap);
+        String outputFullFilePath = resultDir + File.separator +
+                fileName + "_" + outputTypeName.name() + "_st" + stiffness +
+                "_fil" + filterSize + "_off" + offset +
+                "_d" + depth + ".tif";
+        // perform saving
+        filesaver.saveAsTiff(outputFullFilePath);
+    }
+
     public static double calculatePercentageForSingleTask(double totalAmountOfWork){
         return 100.0/totalAmountOfWork;
     }
