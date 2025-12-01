@@ -66,8 +66,8 @@ public class PreviewDialogWithoutChannelWorker extends SwingWorker<Void, Void>{
     @Override
     protected void done(){
         progressBar.setValue(100);
-        statusBar.setText("Complete Processing");
-        statusBar.setToolTipText("Complete Processing");
+        statusBar.setText("Complete");
+        statusBar.setToolTipText("Complete");
         result.updateAndRepaintWindow();
 
     }
