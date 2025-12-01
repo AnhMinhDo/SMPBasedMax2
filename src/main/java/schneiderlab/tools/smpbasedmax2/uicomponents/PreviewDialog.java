@@ -249,7 +249,7 @@ public class PreviewDialog extends JDialog {
 		contentPane.add(button5Cancel, "cell 2 6");
 
 		//---- button4StartProcess ----
-		button4StartProcess.setText("Process");
+		button4StartProcess.setText("Update Preview");
 		contentPane.add(button4StartProcess, "cell 3 6");
 		pack();
 		setLocationRelativeTo(getOwner());
