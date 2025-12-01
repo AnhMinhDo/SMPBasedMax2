@@ -84,7 +84,8 @@ public class ActionButtonProcess implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         setProcessingMode();
-        setzStackDirection();
+//        setzStackDirection();
+        zStackDirection = (ZStackDirection) zStackDirectionCombobox.getSelectedItem();
         progressBar.setValue(0);
         statusBar.setText("processing...");
         // GET THE SELECTED OUTPUT

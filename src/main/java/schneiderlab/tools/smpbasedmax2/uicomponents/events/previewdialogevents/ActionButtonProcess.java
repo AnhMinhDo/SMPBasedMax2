@@ -54,7 +54,8 @@ public class ActionButtonProcess implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        setzStackDirection();
+//        setzStackDirection();
+        zStackDirection = (ZStackDirection) zStackDirectionCombobox.getSelectedItem();
         stiffness = (int)spinnerStiffness.getValue();
         filterSize = (int)spinnerFilterSize.getValue();
         offSet = (int)spinnerOffSet.getValue();
