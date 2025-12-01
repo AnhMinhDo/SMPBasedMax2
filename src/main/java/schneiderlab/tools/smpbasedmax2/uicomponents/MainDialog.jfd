@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "8.2.2.0.382" Java: "21.0.7" encoding: "UTF-8"
+JFDML JFormDesigner: "8.2.2.0.382" Java: "21.0.9" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -117,10 +117,8 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JComboBox" ) {
 				name: "comboBox1ZStackDirection"
-				"model": new javax.swing.DefaultComboBoxModel {
-					selectedItem: "IN"
-					addElement( "IN" )
-					addElement( "OUT" )
+				auxiliary() {
+					"JavaCodeGenerator.customCreateCode": "new JComboBox<>(ZStackDirection.values());"
 				}
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 5 2,alignx left,growx 0"
@@ -159,9 +157,7 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JSpinner" ) {
 				name: "spinner3Offset"
-				"model": new javax.swing.SpinnerNumberModel {
-					minimum: 0
-				}
+				"model": new javax.swing.SpinnerNumberModel
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 5 5"
 			} )
@@ -182,9 +178,7 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JSpinner" ) {
 				name: "spinner4Depth"
-				"model": new javax.swing.SpinnerNumberModel {
-					minimum: 0
-				}
+				"model": new javax.swing.SpinnerNumberModel
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 5 6"
 			} )

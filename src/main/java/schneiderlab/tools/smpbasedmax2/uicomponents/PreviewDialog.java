@@ -217,7 +217,7 @@ public class PreviewDialog extends JDialog {
 		contentPane.add(label8Offset, "cell 0 3 3 1,alignx right,growx 0");
 
 		//---- spinner3Offset ----
-		spinner3Offset.setModel(new SpinnerNumberModel(0, 0, null, 1));
+		spinner3Offset.setModel(new SpinnerNumberModel(0, null, null, 1));
 		contentPane.add(spinner3Offset, "cell 3 3");
 
 		//---- label6Depth ----
@@ -227,7 +227,7 @@ public class PreviewDialog extends JDialog {
 		contentPane.add(label6Depth, "cell 0 4 3 1,alignx right,growx 0");
 
 		//---- spinner4Depth ----
-		spinner4Depth.setModel(new SpinnerNumberModel(0, 0, null, 1));
+		spinner4Depth.setModel(new SpinnerNumberModel(0, null, null, 1));
 		contentPane.add(spinner4Depth, "cell 3 4");
 
 		//---- textField3Status ----

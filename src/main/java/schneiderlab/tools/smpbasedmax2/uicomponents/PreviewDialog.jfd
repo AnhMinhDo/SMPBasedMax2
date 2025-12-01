@@ -64,9 +64,7 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JSpinner" ) {
 				name: "spinner3Offset"
-				"model": new javax.swing.SpinnerNumberModel {
-					minimum: 0
-				}
+				"model": new javax.swing.SpinnerNumberModel
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 3 3"
 			} )
@@ -80,9 +78,7 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JSpinner" ) {
 				name: "spinner4Depth"
-				"model": new javax.swing.SpinnerNumberModel {
-					minimum: 0
-				}
+				"model": new javax.swing.SpinnerNumberModel
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 3 4"
 			} )

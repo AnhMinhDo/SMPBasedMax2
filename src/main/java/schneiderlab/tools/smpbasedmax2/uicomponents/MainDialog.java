@@ -6,6 +6,7 @@ import javax.swing.border.*;
 import net.miginfocom.swing.*;
 import schneiderlab.tools.smpbasedmax2.SMPToolView;
 import schneiderlab.tools.smpbasedmax2.ThemeMode;
+import schneiderlab.tools.smpbasedmax2.ZStackDirection;
 import schneiderlab.tools.smpbasedmax2.uicomponents.events.*;
 /*
  * Created by JFormDesigner on Mon Jun 09 23:41:48 CEST 2025
@@ -206,7 +207,7 @@ public class MainDialog extends JFrame implements SMPToolView {
 		checkBox4PreviewRef = new JCheckBox();
 		comboBox5PreviewRef = new JComboBox();
 		label2ZStackDirection = new JLabel();
-		comboBox1ZStackDirection = new JComboBox<>();
+		comboBox1ZStackDirection = new JComboBox<>(ZStackDirection.values());
 		label3Stiffness = new JLabel();
 		spinner1Stiffeness = new JSpinner();
 		label4FilterSize = new JLabel();
@@ -326,12 +327,6 @@ public class MainDialog extends JFrame implements SMPToolView {
 		//---- label2ZStackDirection ----
 		label2ZStackDirection.setText("Direction of Z stack: ");
 		contentPane.add(label2ZStackDirection, "cell 0 2 4 1,alignx right,growx 0");
-
-		//---- comboBox1ZStackDirection ----
-		comboBox1ZStackDirection.setModel(new DefaultComboBoxModel<>(new String[] {
-			"IN",
-			"OUT"
-		}));
 		contentPane.add(comboBox1ZStackDirection, "cell 5 2,alignx left,growx 0");
 
 		//---- label3Stiffness ----
@@ -353,7 +348,7 @@ public class MainDialog extends JFrame implements SMPToolView {
 		contentPane.add(spinner2FilterSize, "cell 5 4");
 
 		//---- spinner3Offset ----
-		spinner3Offset.setModel(new SpinnerNumberModel(0, 0, null, 1));
+		spinner3Offset.setModel(new SpinnerNumberModel(0, null, null, 1));
 		contentPane.add(spinner3Offset, "cell 5 5");
 
 		//---- label8Offset ----
@@ -368,7 +363,7 @@ public class MainDialog extends JFrame implements SMPToolView {
 		contentPane.add(label6Depth, "cell 0 6 4 1,alignx right,growx 0");
 
 		//---- spinner4Depth ----
-		spinner4Depth.setModel(new SpinnerNumberModel(0, 0, null, 1));
+		spinner4Depth.setModel(new SpinnerNumberModel(0, null, null, 1));
 		contentPane.add(spinner4Depth, "cell 5 6");
 
 		//---- label7DirPath ----
@@ -467,7 +462,7 @@ public class MainDialog extends JFrame implements SMPToolView {
 	private JCheckBox checkBox4PreviewRef;
 	private JComboBox comboBox5PreviewRef;
 	private JLabel label2ZStackDirection;
-	private JComboBox<String> comboBox1ZStackDirection;
+	private JComboBox comboBox1ZStackDirection;
 	private JLabel label3Stiffness;
 	private JSpinner spinner1Stiffeness;
 	private JLabel label4FilterSize;
