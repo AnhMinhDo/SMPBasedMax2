@@ -171,12 +171,7 @@ public class ActionButtonProcess implements ActionListener {
     }
 
     private void setzStackDirection(){
-        String zStackDirectionstring = (String) zStackDirectionCombobox.getSelectedItem();
-        if(zStackDirectionstring.equals("IN")){
-            zStackDirection = ZStackDirection.IN;
-        } else if (zStackDirectionstring.equals("OUT")) {
-            zStackDirection = ZStackDirection.OUT;
-        }
+        zStackDirection = (ZStackDirection) zStackDirectionCombobox.getSelectedItem();
     }
 
     private void setProcessingMode(){
