@@ -114,6 +114,7 @@ public class ProcessPreviewFileWorker extends SwingWorker<Void, Void> {
                 Paths.get(filePath));
         // create the PreviewDialogView with the current parameter
         PreviewDialog previewDialogView = new PreviewDialog(parent);
+        previewDialogView.getComboBox1ZStackDirection().setSelectedItem(this.zStackDirection);
         previewDialogView.getSpinner1Stiffeness().setValue(mainDialogView.getSpinner1Stiffeness().getValue());
         previewDialogView.getSpinner2FilterSize().setValue(mainDialogView.getSpinner2FilterSize().getValue());
         previewDialogView.getSpinner3Offset().setValue(mainDialogView.getSpinner3Offset().getValue());
