@@ -3,6 +3,7 @@ package schneiderlab.tools.smpbasedmax2.uicomponents;
 import java.awt.*;
 import javax.swing.*;
 import net.miginfocom.swing.*;
+import schneiderlab.tools.smpbasedmax2.ZStackDirection;
 /*
  * Created by JFormDesigner on Wed Jun 25 19:41:46 CEST 2025
  */
@@ -143,7 +144,7 @@ public class PreviewDialog extends JDialog {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
 		// Generated using JFormDesigner Educational license - Anh Minh Do
 		label2ZStackDirection = new JLabel();
-		comboBox1ZStackDirection = new JComboBox<>();
+		comboBox1ZStackDirection = new JComboBox<>(ZStackDirection.values());
 		label3Stiffness = new JLabel();
 		spinner1Stiffeness = new JSpinner();
 		label4FilterSize = new JLabel();
@@ -190,12 +191,6 @@ public class PreviewDialog extends JDialog {
 		//---- label2ZStackDirection ----
 		label2ZStackDirection.setText("Direction of Z stack: ");
 		contentPane.add(label2ZStackDirection, "cell 0 0 3 1,alignx right,growx 0");
-
-		//---- comboBox1ZStackDirection ----
-		comboBox1ZStackDirection.setModel(new DefaultComboBoxModel<>(new String[] {
-			"IN",
-			"OUT"
-		}));
 		contentPane.add(comboBox1ZStackDirection, "cell 3 0,alignx left,growx 0");
 
 		//---- label3Stiffness ----
@@ -259,7 +254,7 @@ public class PreviewDialog extends JDialog {
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
 	// Generated using JFormDesigner Educational license - Anh Minh Do
 	private JLabel label2ZStackDirection;
-	private JComboBox<String> comboBox1ZStackDirection;
+	private JComboBox comboBox1ZStackDirection;
 	private JLabel label3Stiffness;
 	private JSpinner spinner1Stiffeness;
 	private JLabel label4FilterSize;

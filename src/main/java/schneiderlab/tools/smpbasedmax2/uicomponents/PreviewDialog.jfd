@@ -17,10 +17,8 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JComboBox" ) {
 				name: "comboBox1ZStackDirection"
-				"model": new javax.swing.DefaultComboBoxModel {
-					selectedItem: "IN"
-					addElement( "IN" )
-					addElement( "OUT" )
+				auxiliary() {
+					"JavaCodeGenerator.customCreateCode": "new JComboBox<>(ZStackDirection.values());"
 				}
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 3 0,alignx left,growx 0"
