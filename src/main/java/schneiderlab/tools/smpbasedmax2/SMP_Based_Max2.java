@@ -21,16 +21,16 @@ public class SMP_Based_Max2 implements PlugIn {
 
     public void launchUI (){
         String osName = System.getProperty("os.name").toLowerCase();
-        try {
-            if (osName.contains("mac")){
-                com.formdev.flatlaf.themes.FlatMacLightLaf.setup();
-            } else {
-                com.formdev.flatlaf.FlatLightLaf.setup();
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        JFrame frame = new JFrame("SMPTool Version 2");
+//        try {
+//            if (osName.contains("mac")){
+//                com.formdev.flatlaf.themes.FlatMacLightLaf.setup();
+//            } else {
+//                com.formdev.flatlaf.FlatLightLaf.setup();
+//            }
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+        JFrame frame = new JFrame("Smooth Manifold Projection Tool");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         MainModel mainModel = new MainModel(ProcessingMode.SINGLE_FILE,
                 ThemeMode.LIGHT,
