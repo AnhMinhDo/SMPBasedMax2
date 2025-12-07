@@ -64,6 +64,7 @@ new FormModel {
 				"icon": new com.jformdesigner.model.SwingIcon( 0, "/iconimages/light_mode_26dp_000000_FILL0_wght400_GRAD0_opsz24.png" )
 				"selectedIcon": new com.jformdesigner.model.SwingIcon( 0, "/iconimages/dark_mode_26dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" )
 				"borderPainted": false
+				"visible": false
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 6 0"
 			} )

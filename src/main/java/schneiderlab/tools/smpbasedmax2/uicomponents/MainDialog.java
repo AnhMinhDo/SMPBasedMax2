@@ -294,6 +294,7 @@ public class MainDialog extends JFrame implements SMPToolView {
 		toggleButton1LightDarkTheme.setIcon(new ImageIcon(getClass().getResource("/iconimages/light_mode_26dp_000000_FILL0_wght400_GRAD0_opsz24.png")));
 		toggleButton1LightDarkTheme.setSelectedIcon(new ImageIcon(getClass().getResource("/iconimages/dark_mode_26dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png")));
 		toggleButton1LightDarkTheme.setBorderPainted(false);
+		toggleButton1LightDarkTheme.setVisible(false);
 		contentPane.add(toggleButton1LightDarkTheme, "cell 6 0");
 
 		//---- label5References ----

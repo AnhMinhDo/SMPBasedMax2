@@ -21,9 +21,9 @@ public class MainController {
         view.getButton3SelectOutput()
                 .addActionListener(new ShowPopUpMenu(view.getButton3SelectOutput(),view.getPopupMenu1Output()));
 
-        // for toggleButton switching light and dark mode
-        view.getToggleButton1LightDarkTheme()
-                .addActionListener(new ToggleLightDarkMode(view.getToggleButton1LightDarkTheme(), view.getParentFrame()));
+//        // for toggleButton switching light and dark mode
+//        view.getToggleButton1LightDarkTheme()
+//                .addActionListener(new ToggleLightDarkMode(view.getToggleButton1LightDarkTheme(), view.getParentFrame()));
 
         // for button browse button directory
         view.getButton1BrowseDirPath()
