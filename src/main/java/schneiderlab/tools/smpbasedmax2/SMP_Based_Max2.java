@@ -1,16 +1,15 @@
 package schneiderlab.tools.smpbasedmax2;
 
 import ij.plugin.PlugIn;
+import schneiderlab.tools.smpbasedmax2.controllers.AfterMainDialogPacked;
 import schneiderlab.tools.smpbasedmax2.controllers.MainController;
 import schneiderlab.tools.smpbasedmax2.models.MainModel;
 import schneiderlab.tools.smpbasedmax2.uicomponents.MainDialog;
 
 import javax.swing.*;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 
 public class SMP_Based_Max2 implements PlugIn {
 
@@ -35,7 +34,7 @@ public class SMP_Based_Max2 implements PlugIn {
         MainModel mainModel = new MainModel(ProcessingMode.SINGLE_FILE,
                 ThemeMode.LIGHT,
                 ZStackDirection.IN,
-                60,
+                10,
                 30,
                 0,
                 0,
@@ -47,6 +46,8 @@ public class SMP_Based_Max2 implements PlugIn {
         frame.setContentPane(form.getContentPane());
         frame.pack();
         frame.setVisible(true);
+        // the function below is for using the current selected opened image as the input so the user does not need to search for the same image file wit hte browse button
+        AfterMainDialogPacked.useCurrentImageAsInput(form);
     }
 
 
