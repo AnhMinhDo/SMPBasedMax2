@@ -17,6 +17,9 @@ public class MainController {
         this.model = model;
         this.view = view;
 
+        // set selection when first start the plugin
+        view.getRadioButton3Preview().setSelected(true);
+
         // Action to show the checkbox list for output type
         view.getButton3SelectOutput()
                 .addActionListener(new ShowPopUpMenu(view.getButton3SelectOutput(),view.getPopupMenu1Output()));
