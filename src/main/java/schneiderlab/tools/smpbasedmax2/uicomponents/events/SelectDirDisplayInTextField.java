@@ -1,5 +1,8 @@
 package schneiderlab.tools.smpbasedmax2.uicomponents.events;
 
+import ij.IJ;
+import ij.io.OpenDialog;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,13 +22,14 @@ public class SelectDirDisplayInTextField implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JFileChooser jFileChooser = new JFileChooser();
+        JFileChooser jFileChooser = new JFileChooser(IJ.getDirectory("current"));
         jFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int returnValue = jFileChooser.showOpenDialog(parent);
         if (returnValue == JFileChooser.APPROVE_OPTION){
             File dir = jFileChooser.getSelectedFile();
             if (dir != null) {
                 textField.setText(dir.getAbsolutePath());
+                OpenDialog.setDefaultDirectory(dir.getAbsolutePath());
             }
         }
     }

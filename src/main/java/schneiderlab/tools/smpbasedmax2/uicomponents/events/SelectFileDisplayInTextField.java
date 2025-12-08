@@ -1,5 +1,8 @@
 package schneiderlab.tools.smpbasedmax2.uicomponents.events;
 
+import ij.IJ;
+import ij.io.OpenDialog;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
@@ -19,16 +22,17 @@ public class SelectFileDisplayInTextField implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JFileChooser jFileChooser = new JFileChooser();
+        JFileChooser jFileChooser = new JFileChooser(IJ.getDirectory("current"));
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
                 "TIFF Images", "tif", "tiff", "TIF", "TIFF");
         jFileChooser.setFileFilter(filter);
         jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int returnValue = jFileChooser.showOpenDialog(parent);
         if (returnValue == JFileChooser.APPROVE_OPTION){
-            File dir = jFileChooser.getSelectedFile();
-            if (dir != null) {
-                textField.setText(dir.getAbsolutePath());
+            File file = jFileChooser.getSelectedFile();
+            if (file != null) {
+                textField.setText(file.getAbsolutePath());
+                OpenDialog.setDefaultDirectory(file.getParent());
             }
         }
     }
