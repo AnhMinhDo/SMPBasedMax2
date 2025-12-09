@@ -1,5 +1,7 @@
 package schneiderlab.tools.smpbasedmax2.uicomponents.events;
 
+import schneiderlab.tools.smpbasedmax2.uicomponents.MainDialog;
+
 import javax.swing.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
@@ -8,9 +10,16 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class DropFileTransferHandler extends TransferHandler {
+public class DropFileOrDirTransferHandler extends TransferHandler {
+    MainDialog mainView;
+    public DropFileOrDirTransferHandler(MainDialog mainView){
+        this.mainView=mainView;
+    }
 
-    public DropFileTransferHandler(){}
+    @Override
+    public int getSourceActions(JComponent c) {
+        return TransferHandler.COPY;  // Essential for drops from external apps
+    }
 
     @Override
     public boolean canImport(TransferSupport support){
@@ -23,8 +32,15 @@ public class DropFileTransferHandler extends TransferHandler {
         Transferable t = support.getTransferable();
         try {
             List<File> files = (List<File>) t.getTransferData(DataFlavor.javaFileListFlavor);
-            for (File file : files) {
-                System.err.println("Dropped file path: " + file.getAbsolutePath());
+            File importedFile = files.get(0);
+            if (importedFile.isFile()){
+                mainView.getTextField2SingleFilePath().setText(
+                        importedFile.getAbsolutePath()
+                );
+            } else {
+                mainView.getTextField1DirPath().setText(
+                        importedFile.getAbsolutePath()
+                );
             }
             return true;
         } catch (UnsupportedFlavorException e) {
