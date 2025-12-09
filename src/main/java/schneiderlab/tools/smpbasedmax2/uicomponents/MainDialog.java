@@ -22,7 +22,6 @@ public class MainDialog extends JFrame implements SMPToolView {
 	public MainDialog(JFrame parentFrame) {
 		initComponents();
 		this.parentFrame = parentFrame;
-
 	}
 
 	public JFrame getParentFrame() {
