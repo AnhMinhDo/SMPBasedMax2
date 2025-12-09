@@ -5,6 +5,7 @@ import schneiderlab.tools.smpbasedmax2.models.MainModel;
 import schneiderlab.tools.smpbasedmax2.uicomponents.MainDialog;
 import schneiderlab.tools.smpbasedmax2.uicomponents.events.*;
 
+import javax.swing.*;
 import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Objects;
@@ -16,6 +17,10 @@ public class MainController {
     public MainController(MainModel model, MainDialog view) {
         this.model = model;
         this.view = view;
+
+        //
+        JComponent component = (JComponent) view.getContentPane();
+        component.setTransferHandler(new DropFileOrDirTransferHandler(view));
 
         // set selection when first start the plugin
         view.getRadioButton3Preview().setSelected(true);
