@@ -46,7 +46,7 @@ public class SMP_Based_Max2 implements PlugIn {
         frame.setContentPane(form.getContentPane());
         frame.pack();
         frame.setVisible(true);
-        // the function below is for using the current selected opened image as the input so the user does not need to search for the same image file wit hte browse button
+        // the function below is for using the current selected opened image as the input so the user does not need to search for the same image file with the browse button
         AfterMainDialogPacked.useCurrentImageAsInput(form);
     }
 
