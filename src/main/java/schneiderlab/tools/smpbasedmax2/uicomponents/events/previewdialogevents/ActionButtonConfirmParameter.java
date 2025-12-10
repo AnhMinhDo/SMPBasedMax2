@@ -1,5 +1,6 @@
 package schneiderlab.tools.smpbasedmax2.uicomponents.events.previewdialogevents;
 
+import schneiderlab.tools.smpbasedmax2.ZStackDirection;
 import schneiderlab.tools.smpbasedmax2.uicomponents.MainDialog;
 import schneiderlab.tools.smpbasedmax2.uicomponents.PreviewDialog;
 
@@ -18,12 +19,8 @@ public class ActionButtonConfirmParameter implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String direction = (String)previewDialogView.getComboBox1ZStackDirection().getSelectedItem();
-        if (direction.equals("IN")){
-            mainDialogView.getComboBox1ZStackDirection().setSelectedIndex(0);
-        } else if (direction.equals("OUT")) {
-            mainDialogView.getComboBox1ZStackDirection().setSelectedIndex(1);
-        }
+        ZStackDirection direction = (ZStackDirection) previewDialogView.getComboBox1ZStackDirection().getSelectedItem();
+        mainDialogView.getComboBox1ZStackDirection().setSelectedItem(direction);
         int stiffness = (int)previewDialogView.getSpinner1Stiffeness().getValue();
         int filtersize = (int)previewDialogView.getSpinner2FilterSize().getValue();
         int offset = (int)previewDialogView.getSpinner3Offset().getValue();
