@@ -37,6 +37,7 @@ public class ProcessPreviewFileWorker extends SwingWorker<Void, Void> {
     private ImagePlus projectedSMPMIPImage;
     private ImagePlus smpMipZmap;
     private ImagePlus result;
+    private ImagePlus referenceChannel;
     private ImagePlus inputImage;
 
     public ProcessPreviewFileWorker(int stiffness,
@@ -73,9 +74,10 @@ public class ProcessPreviewFileWorker extends SwingWorker<Void, Void> {
             double percentageOfCompletedTask = 0;
             // Perform single file projection
             ImagePlus inputImageRaw = new ImagePlus(filePath);
+            this.inputImage = inputImageRaw;
             ImagePlus[] inputImageChannels = ChannelSplitter.split(inputImageRaw);
-            this.inputImage = inputImageChannels[referenceChannelIdx];
-            HandleSingleFile handleSingleFile = new HandleSingleFile(inputImage,
+            this.referenceChannel = inputImageChannels[referenceChannelIdx];
+            HandleSingleFile handleSingleFile = new HandleSingleFile(referenceChannel,
                     zStackDirection,
                     stiffness,
                     filterSize,
@@ -91,7 +93,7 @@ public class ProcessPreviewFileWorker extends SwingWorker<Void, Void> {
             double percentageOf1Task = SmpBasedMaxUtil.calculatePercentageForSingleTask(1);
             double percentageOfCompletedTask = 0;
             // Perform single file projection
-            ImagePlus inputImage = new ImagePlus(filePath);
+            this.inputImage = new ImagePlus(filePath);
             HandleSingleFileWithChannels handleSingleFileWithChannels = new HandleSingleFileWithChannels(inputImage,zStackDirection,stiffness,filterSize,offset,depth,referenceChannelIdx);
             this.result = handleSingleFileWithChannels.process();
             // Update progress bar
@@ -130,7 +132,7 @@ public class ProcessPreviewFileWorker extends SwingWorker<Void, Void> {
                 hasManyChannels,
                 referenceChannelIdx,
                 result,
-                inputImage);
+                referenceChannel);
         // show the previewDialog
         previewDialogView.setTitle(inputImage.getTitle());
         previewDialogView.pack();
