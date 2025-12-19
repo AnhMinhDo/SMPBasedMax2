@@ -26,15 +26,14 @@
 
 ![Main Interface](./assets/README_Images/SMPTool_UI.svg)
 
-**1** : The process modes selection
+**1** : The process mode selection
 
-    - SINGLE_FILE: perform projection of the image selected in file path field (9) and save the output to the same directory of the input
+- **SINGLE_FILE**: perform projection of the image selected in file path field (9) and save the output to the same directory of the input
 
-    - MULTIPLE_FILES: batch processing  and saving of all the .tif images in directory path field (10)
+- **MULTIPLE_FILES**: batch processing  and saving of all the .tif images in directory path field (10)
 
-    - PREVIEW: show the output image in a new window with a sub dialog for calibrating the parameters; 
-
-                multiple preview windows can be opened simultaneously
+- **PREVIEW**: show the output image in a new window with a sub dialog for calibrating the parameters; 
+ multiple preview windows can be opened simultaneously
 
 **2** : Reference channel selection
 
@@ -44,9 +43,9 @@ The default selection is the first channel
 
 **3** : The Direction of the Stack
 
-    - OUT : The image stack is captured starting from inside the object and ending at the surface
+- **OUT** : The image stack is captured starting from inside the object and ending at the surface
     
-    - IN : The image stack is captured starting from surface and moving inside the object
+- **IN** : The image stack is captured starting from surface and moving inside the object
 
 **4** : Envelope Stiffness
 
