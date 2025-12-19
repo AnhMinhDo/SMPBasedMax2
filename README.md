@@ -1,4 +1,12 @@
-# Installation:
+# Surface Projection Tool
+![Bioimage Analysis](https://img.shields.io/badge/Field-Bioimage%20Analysis-6A5ACD)
+![Scientific Software](https://img.shields.io/badge/Type-Scientific%20Software-green)
+![Z-Stack Only](https://img.shields.io/badge/Data-Z--Stack%20Only-critical)
+![Java](https://img.shields.io/badge/Java-8%2B-orange)
+![Fiji](https://img.shields.io/badge/Fiji-Compatible-brightgreen)
+![ImageJ](https://img.shields.io/badge/ImageJ-Fiji-blue)
+![License](https://img.shields.io/github/license/AnhMinhDo/SMPBasedMax2)
+## Installation:
 
 1.Download the .jar file using the link below:
 
@@ -10,7 +18,7 @@ https://github.com/AnhMinhDo/SMPBasedMax2/releases/download/v0.1.0-beta/SMPBased
 
 4. The plugin can be found in  ImageJ/Fiji Plugin menu
 
-# User Interface:
+## User Interface:
 
 ![Main Interface](./assets/README_Images/SMPTool_UI.svg)
 
