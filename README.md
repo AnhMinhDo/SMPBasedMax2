@@ -15,8 +15,6 @@
 | :----:| :----:|
 | ![GitHub release](https://img.shields.io/github/v/release/AnhMinhDo/SMPBasedMax2) | [Download](https://github.com/AnhMinhDo/SMPBasedMax2/releases/download/v0.1.0-beta/SMPBasedMax_2_1.0-SNAPSHOT.jar) |
 
-https://github.com/AnhMinhDo/SMPBasedMax2/releases/download/v0.1.0-beta/SMPBasedMax_2_1.0-SNAPSHOT.jar
-
 2. In ImageJ/Fiji installation folder/directory, paste the .jar file in plugins folder/directory 
 
 3. Restart Fiji
