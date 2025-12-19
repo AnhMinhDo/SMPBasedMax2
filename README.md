@@ -1,4 +1,5 @@
 # Surface Projection Tool
+![GitHub release](https://img.shields.io/github/v/release/AnhMinhDo/SMPBasedMax2)
 ![Bioimage Analysis](https://img.shields.io/badge/Field-Bioimage%20Analysis-6A5ACD)
 ![Scientific Software](https://img.shields.io/badge/Type-Scientific%20Software-green)
 ![Z-Stack Only](https://img.shields.io/badge/Data-Z--Stack%20Only-critical)
@@ -9,6 +10,10 @@
 ## Installation:
 
 1.Download the .jar file using the link below:
+
+| Version | Link |
+| :----:| :----:|
+| ![GitHub release](https://img.shields.io/github/v/release/AnhMinhDo/SMPBasedMax2) | [Download](https://github.com/AnhMinhDo/SMPBasedMax2/releases/download/v0.1.0-beta/SMPBasedMax_2_1.0-SNAPSHOT.jar) |
 
 https://github.com/AnhMinhDo/SMPBasedMax2/releases/download/v0.1.0-beta/SMPBasedMax_2_1.0-SNAPSHOT.jar
 
