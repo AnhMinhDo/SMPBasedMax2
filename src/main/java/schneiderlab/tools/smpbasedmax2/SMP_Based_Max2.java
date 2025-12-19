@@ -1,5 +1,6 @@
 package schneiderlab.tools.smpbasedmax2;
 
+import ij.ImagePlus;
 import ij.plugin.PlugIn;
 import schneiderlab.tools.smpbasedmax2.controllers.AfterMainDialogPacked;
 import schneiderlab.tools.smpbasedmax2.controllers.MainController;

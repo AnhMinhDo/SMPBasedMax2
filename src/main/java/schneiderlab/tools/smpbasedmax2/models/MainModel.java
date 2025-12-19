@@ -18,7 +18,16 @@ public class MainModel implements SMPToolModel {
     private Path filePath;
     private HashSet<OutputTypeName> output;
 
-    public MainModel(ProcessingMode processingMode, ThemeMode themeMode, ZStackDirection zStackDirection, int stiffness, int filterSize, int offset, int depth, Path directoryPath, Path filePath, HashSet<OutputTypeName> output) {
+    public MainModel(ProcessingMode processingMode,
+                     ThemeMode themeMode,
+                     ZStackDirection zStackDirection,
+                     int stiffness,
+                     int filterSize,
+                     int offset,
+                     int depth,
+                     Path directoryPath,
+                     Path filePath,
+                     HashSet<OutputTypeName> output) {
         this.processingMode = processingMode;
         this.themeMode = themeMode;
         this.zStackDirection = zStackDirection;
