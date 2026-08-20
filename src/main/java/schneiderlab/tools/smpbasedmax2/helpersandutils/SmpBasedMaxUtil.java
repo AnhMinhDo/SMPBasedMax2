@@ -233,16 +233,16 @@ public class SmpBasedMaxUtil {
         // get the parent directory
         String resultDir = fileNamePath.getParent().toAbsolutePath().toString();
         String fileName = extractFilename(fileNamePath.getFileName().toString());
-        //Convert to 8 bit
-        ImageConverter imageConverter = new ImageConverter(projectedImgOrZmap);
-        imageConverter.convertToGray8();
-        FileSaver projectedImg8bit = new FileSaver(projectedImgOrZmap);
+//        //Convert to 8 bit
+//        ImageConverter imageConverter = new ImageConverter(projectedImgOrZmap);
+//        imageConverter.convertToGray8();
+        FileSaver projectedImg = new FileSaver(projectedImgOrZmap);
         String outputFullFilePath = resultDir + File.separator +
                 fileName + "_" + outputTypeName.name() + "_st" + stiffness +
                 "_fil" + filterSize + "_off" + offset +
                 "_d" + depth + "_sig" + sigma + ".tif";
         // performing saving in 8 bit
-        projectedImg8bit.saveAsTiff(outputFullFilePath);
+        projectedImg.saveAsTiff(outputFullFilePath);
         }
 
     public static void savePostProcessImagePlusZmap(ImagePlus Zmap,
