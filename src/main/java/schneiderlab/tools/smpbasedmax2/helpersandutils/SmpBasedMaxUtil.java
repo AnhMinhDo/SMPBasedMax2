@@ -5,7 +5,9 @@ import ij.ImagePlus;
 import ij.ImageStack;
 import ij.io.FileSaver;
 import ij.plugin.ChannelSplitter;
+import ij.plugin.filter.GaussianBlur;
 import ij.process.ImageConverter;
+import ij.process.ImageProcessor;
 import ij.process.StackConverter;
 import schneiderlab.tools.smpbasedmax2.OutputTypeName;
 import schneiderlab.tools.smpbasedmax2.ZStackDirection;
@@ -154,6 +156,22 @@ public class SmpBasedMaxUtil {
         }
         return inputImage;
     }
+
+    public static ImagePlus gaussianBlurImageStack(ImagePlus imagePlus, double sigma){
+        if (imagePlus == null || sigma <= 0) {
+            return imagePlus;
+        }
+        ImageStack sourceStack = imagePlus.getStack();
+        ImageStack resultStack = sourceStack.duplicate();
+        for (int i = 1; i <= sourceStack.size(); i++) {
+            resultStack.getProcessor(i).blurGaussian(sigma);
+        }
+        ImagePlus result = new ImagePlus(imagePlus.getTitle(),resultStack);
+        result.setDimensions(imagePlus.getNChannels(), imagePlus.getNSlices(), imagePlus.getNFrames());
+        result.setOpenAsHyperStack(imagePlus.isHyperStack());
+        result.setCalibration(imagePlus.getCalibration());
+        return result;
+    }
 //    public static void savePostProcessImagePlus(ImagePlus projectedImgOrZmap,
 //                                                OutputTypeName outputTypeName,
 //                                                String resultDir,
@@ -210,7 +228,8 @@ public class SmpBasedMaxUtil {
                                                 int stiffness,
                                                 int filterSize,
                                                 int offset,
-                                                int depth) {
+                                                int depth,
+                                                double sigma) {
         // get the parent directory
         String resultDir = fileNamePath.getParent().toAbsolutePath().toString();
         String fileName = extractFilename(fileNamePath.getFileName().toString());
@@ -221,7 +240,7 @@ public class SmpBasedMaxUtil {
         String outputFullFilePath = resultDir + File.separator +
                 fileName + "_" + outputTypeName.name() + "_st" + stiffness +
                 "_fil" + filterSize + "_off" + offset +
-                "_d" + depth + ".tif";
+                "_d" + depth + "_sig" + sigma + ".tif";
         // performing saving in 8 bit
         projectedImg8bit.saveAsTiff(outputFullFilePath);
         }
@@ -232,7 +251,8 @@ public class SmpBasedMaxUtil {
                                                 int stiffness,
                                                 int filterSize,
                                                 int offset,
-                                                int depth) {
+                                                int depth,
+                                                double sigma) {
         // get the parent directory
         String resultDir = fileNamePath.getParent().toAbsolutePath().toString();
         String fileName = extractFilename(fileNamePath.getFileName().toString());
@@ -241,7 +261,7 @@ public class SmpBasedMaxUtil {
         String outputFullFilePath = resultDir + File.separator +
                 fileName + "_" + outputTypeName.name() + "_st" + stiffness +
                 "_fil" + filterSize + "_off" + offset +
-                "_d" + depth + ".tif";
+                "_d" + depth + "_sig" + sigma + ".tif";
         // perform saving
         filesaver.saveAsTiff(outputFullFilePath);
     }

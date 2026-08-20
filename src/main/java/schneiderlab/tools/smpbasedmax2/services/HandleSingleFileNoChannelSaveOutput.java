@@ -20,6 +20,7 @@ public class HandleSingleFileNoChannelSaveOutput {
     private final ZStackDirection zStackDirection;
     private final int offset;
     private final int depth;
+    private final double sigma;
     private float[] envMaxzValues;
 
     private ImagePlus MIPImage;
@@ -35,7 +36,8 @@ public class HandleSingleFileNoChannelSaveOutput {
                                                int stiffness, int filterSize,
                                                ZStackDirection zStackDirection,
                                                int offset,
-                                               int depth) {
+                                               int depth,
+                                               double sigma) {
         this.inputPath = inputPath;
         this.inputImage = inputImage;
         this.outputTypeSet = outputTypeSet;
@@ -44,6 +46,7 @@ public class HandleSingleFileNoChannelSaveOutput {
         this.zStackDirection = zStackDirection;
         this.offset = offset;
         this.depth = depth;
+        this.sigma = sigma;
     }
 
     public void processAndSaveOutput(){
@@ -103,6 +106,13 @@ public class HandleSingleFileNoChannelSaveOutput {
         MaxIntensityProjection projector = new MaxIntensityProjection(inputImage);
         this.MIPImage = projector.doProjection();
         this.zMap = projector.getZmap();
+        // blur and MIP
+        if(this.sigma!=0.0){
+             ImagePlus bluredStack = SmpBasedMaxUtil.gaussianBlurImageStack(inputImage,this.sigma);
+            MaxIntensityProjection bluredMIP = new MaxIntensityProjection(bluredStack);
+            bluredMIP.doProjection();
+            this.zMap = bluredMIP.getZmap();
+        }
         // ZProjecting SMP
         SMProjection smProjector = new SMProjection(inputImage, zMap, stiffness, filterSize, zStackDirection, offset);
         this.projectedSMPImage = smProjector.doSMProjection();
@@ -138,7 +148,8 @@ public class HandleSingleFileNoChannelSaveOutput {
                 this.stiffness,
                 this.filterSize,
                 this.offset,
-                this.depth);
+                this.depth,
+                this.sigma);
     }
 
     private void saveMIPZMap(){
@@ -148,7 +159,8 @@ public class HandleSingleFileNoChannelSaveOutput {
                 this.stiffness,
                 this.filterSize,
                 this.offset,
-                this.depth);
+                this.depth,
+                this.sigma);
     }
 
     private void saveSMP(){
@@ -159,7 +171,8 @@ public class HandleSingleFileNoChannelSaveOutput {
                     this.stiffness,
                     this.filterSize,
                     this.offset,
-                    this.depth);
+                    this.depth,
+                    this.sigma);
         } else {
             SmpBasedMaxUtil.savePostProcessImagePlus(this.projectedSMPMIPImage,
                     OutputTypeName.SMPbasedMIP,
@@ -167,7 +180,8 @@ public class HandleSingleFileNoChannelSaveOutput {
                     this.stiffness,
                     this.filterSize,
                     this.offset,
-                    this.depth);
+                    this.depth,
+                    this.sigma);
         }
     }
 
@@ -179,7 +193,8 @@ public class HandleSingleFileNoChannelSaveOutput {
                     this.stiffness,
                     this.filterSize,
                     this.offset,
-                    this.depth);
+                    this.depth,
+                    this.sigma);
         } else {
             SmpBasedMaxUtil.savePostProcessImagePlusZmap(this.smpMipZmap,
                     OutputTypeName.SMPbasedMIP_ZMAP,
@@ -187,7 +202,8 @@ public class HandleSingleFileNoChannelSaveOutput {
                     this.stiffness,
                     this.filterSize,
                     this.offset,
-                    this.depth);
+                    this.depth,
+                    this.sigma);
         }
     }
 }

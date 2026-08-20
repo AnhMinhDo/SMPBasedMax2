@@ -21,6 +21,7 @@ public class PreviewDialogWithoutChannelWorker extends SwingWorker<Void, Void>{
     private final ZStackDirection zStackDirection;
     private final int offset;
     private final int depth;
+    private final double sigma;
     private float[] envMaxzValues;
 //    private final boolean hasManyChannels;
 //    private final int referenceChannelIdx;
@@ -34,7 +35,7 @@ public class PreviewDialogWithoutChannelWorker extends SwingWorker<Void, Void>{
     private ImagePlus result;
     private ImagePlus inputImage;
 
-    public PreviewDialogWithoutChannelWorker (JTextField statusBar, JProgressBar progressBar, PreviewDialog previewDialogView, Path filePath, int stiffness, int filterSize, ZStackDirection zStackDirection, int offset, int depth, ImagePlus result, ImagePlus inputImage) {
+    public PreviewDialogWithoutChannelWorker (JTextField statusBar, JProgressBar progressBar, PreviewDialog previewDialogView, Path filePath, int stiffness, int filterSize, ZStackDirection zStackDirection, int offset, int depth, double sigma, ImagePlus result, ImagePlus inputImage) {
         this.statusBar = statusBar;
         this.progressBar = progressBar;
         this.previewDialogView = previewDialogView;
@@ -44,6 +45,7 @@ public class PreviewDialogWithoutChannelWorker extends SwingWorker<Void, Void>{
         this.zStackDirection = zStackDirection;
         this.offset = offset;
         this.depth = depth;
+        this.sigma = sigma;
         this.result = result;
         this.inputImage= inputImage;
     }
@@ -56,7 +58,8 @@ public class PreviewDialogWithoutChannelWorker extends SwingWorker<Void, Void>{
                 stiffness,
                 filterSize,
                 offset,
-                depth);
+                depth,
+                sigma);
         ImagePlus output = handleSingleFile.process();
         ImageProcessor outputProcessor = output.getProcessor();
         result.setProcessor(outputProcessor);

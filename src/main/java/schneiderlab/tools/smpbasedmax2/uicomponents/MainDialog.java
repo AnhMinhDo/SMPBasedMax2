@@ -100,6 +100,8 @@ public class MainDialog extends JFrame implements SMPToolView {
 		return spinner2FilterSize;
 	}
 
+	public JSpinner getSpinnerSigma(){return spinnerSigma;}
+
 	public JSpinner getSpinner3Offset() {
 		return spinner3Offset;
 	}
@@ -211,6 +213,8 @@ public class MainDialog extends JFrame implements SMPToolView {
 		spinner1Stiffeness = new JSpinner();
 		label4FilterSize = new JLabel();
 		spinner2FilterSize = new JSpinner();
+		labelSigma = new JLabel();
+		spinnerSigma = new JSpinner();
 		spinner3Offset = new JSpinner();
 		label8Offset = new JLabel();
 		label6Depth = new JLabel();
@@ -247,6 +251,7 @@ public class MainDialog extends JFrame implements SMPToolView {
 			"[fill]" +
 			"[fill]",
 			// rows
+			"[]" +
 			"[]" +
 			"[]" +
 			"[]" +
@@ -347,72 +352,80 @@ public class MainDialog extends JFrame implements SMPToolView {
 		spinner2FilterSize.setModel(new SpinnerNumberModel(30, 0, null, 1));
 		contentPane.add(spinner2FilterSize, "cell 5 4");
 
+		//---- labelSigma ----
+		labelSigma.setText("Sigma:");
+		contentPane.add(labelSigma, "cell 0 5 4 1,alignx right,growx 0");
+
+		//---- spinnerSigma ----
+		spinnerSigma.setModel(new SpinnerNumberModel(0.0, 0.0, null, 0.1));
+		contentPane.add(spinnerSigma, "cell 5 5");
+
 		//---- spinner3Offset ----
 		spinner3Offset.setModel(new SpinnerNumberModel(0, null, null, 1));
-		contentPane.add(spinner3Offset, "cell 5 5");
+		contentPane.add(spinner3Offset, "cell 5 6");
 
 		//---- label8Offset ----
 		label8Offset.setText("Offset [pixels]:");
 		label8Offset.setToolTipText("Offset: number of planes above(+) or below(-) blanket [pixels]");
-		contentPane.add(label8Offset, "cell 0 5 4 1,alignx right,growx 0");
+		contentPane.add(label8Offset, "cell 0 6 4 1,alignx right,growx 0");
 
 		//---- label6Depth ----
 		label6Depth.setText("Depth [pixels]:");
 		label6Depth.setLabelFor(spinner4Depth);
 		label6Depth.setToolTipText("Depth:MIP for N pixels into blanket [pixels]");
-		contentPane.add(label6Depth, "cell 0 6 4 1,alignx right,growx 0");
+		contentPane.add(label6Depth, "cell 0 7 4 1,alignx right,growx 0");
 
 		//---- spinner4Depth ----
 		spinner4Depth.setModel(new SpinnerNumberModel(0, null, null, 1));
-		contentPane.add(spinner4Depth, "cell 5 6");
+		contentPane.add(spinner4Depth, "cell 5 7");
 
 		//---- label7DirPath ----
 		label7DirPath.setText("Directory for MULTIPLE_FILES:");
-		contentPane.add(label7DirPath, "cell 0 7 2 1,alignx right,growx 0");
+		contentPane.add(label7DirPath, "cell 0 8 2 1,alignx right,growx 0");
 
 		//---- button1BrowseDirPath ----
 		button1BrowseDirPath.setText("Browse");
 		button1BrowseDirPath.setEnabled(false);
-		contentPane.add(button1BrowseDirPath, "cell 3 7");
+		contentPane.add(button1BrowseDirPath, "cell 3 8");
 
 		//---- textField1DirPath ----
 		textField1DirPath.setEnabled(false);
 		textField1DirPath.setEditable(false);
-		contentPane.add(textField1DirPath, "cell 5 7");
+		contentPane.add(textField1DirPath, "cell 5 8");
 
 		//---- label9SingleFilePath ----
 		label9SingleFilePath.setText("File path for SINGLE FILE:");
-		contentPane.add(label9SingleFilePath, "cell 0 8 2 1,alignx right,growx 0");
+		contentPane.add(label9SingleFilePath, "cell 0 9 2 1,alignx right,growx 0");
 
 		//---- button2BrowseSingleFile ----
 		button2BrowseSingleFile.setText("Browse");
-		contentPane.add(button2BrowseSingleFile, "cell 3 8");
+		contentPane.add(button2BrowseSingleFile, "cell 3 9");
 
 		//---- textField2SingleFilePath ----
 		textField2SingleFilePath.setEditable(false);
-		contentPane.add(textField2SingleFilePath, "cell 5 8");
+		contentPane.add(textField2SingleFilePath, "cell 5 9");
 
 		//---- label11ChooseOutput ----
 		label11ChooseOutput.setText("Choose Output File type:");
-		contentPane.add(label11ChooseOutput, "cell 0 9 4 1,alignx right,growx 0");
+		contentPane.add(label11ChooseOutput, "cell 0 10 4 1,alignx right,growx 0");
 
 		//---- button3SelectOutput ----
 		button3SelectOutput.setText("select output");
 		button3SelectOutput.setComponentPopupMenu(popupMenu1Output);
-		contentPane.add(button3SelectOutput, "cell 5 9");
+		contentPane.add(button3SelectOutput, "cell 5 10");
 
 		//---- textField3Status ----
 		textField3Status.setEditable(false);
-		contentPane.add(textField3Status, "cell 0 10");
-		contentPane.add(progressBar1, "cell 1 10");
+		contentPane.add(textField3Status, "cell 0 11");
+		contentPane.add(progressBar1, "cell 1 11");
 
 		//---- button4StartProcess ----
 		button4StartProcess.setText("Start Process");
-		contentPane.add(button4StartProcess, "cell 3 10");
+		contentPane.add(button4StartProcess, "cell 3 11");
 
 		//---- button5Cancel ----
 		button5Cancel.setText("Cancel");
-		contentPane.add(button5Cancel, "cell 5 10");
+		contentPane.add(button5Cancel, "cell 5 11");
 		pack();
 		setLocationRelativeTo(getOwner());
 
@@ -467,6 +480,8 @@ public class MainDialog extends JFrame implements SMPToolView {
 	private JSpinner spinner1Stiffeness;
 	private JLabel label4FilterSize;
 	private JSpinner spinner2FilterSize;
+	private JLabel labelSigma;
+	private JSpinner spinnerSigma;
 	private JSpinner spinner3Offset;
 	private JLabel label8Offset;
 	private JLabel label6Depth;

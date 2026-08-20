@@ -28,6 +28,7 @@ public class HandleSingleFileWithChannels {
     private int filterSize;
     private int offset;
     private int depth;
+    private double sigma;
     private ImagePlus output;
     private int referenceIndx;
     private CompositeImage merged;
@@ -39,6 +40,7 @@ public class HandleSingleFileWithChannels {
                                         int filterSize,
                                         int offset,
                                         int depth,
+                                        double sigma,
                                         int referenceIndx) {
         this.input = input;
         // assign other attributes
@@ -47,6 +49,7 @@ public class HandleSingleFileWithChannels {
         this.filterSize = filterSize;
         this.offset = offset;
         this.depth = depth;
+        this.sigma = sigma;
         this.referenceIndx = referenceIndx;
     }
     public ImagePlus process(){
@@ -60,7 +63,7 @@ public class HandleSingleFileWithChannels {
         ImagePlus[] outputChannels = new ImagePlus[channels.length];
         ImagePlus referenceChannel = channels[referenceIndx];
         // process the reference channel first
-        HandleSingleFile hsf = new HandleSingleFile(referenceChannel, zStackDirection, stiffness, filterSize, offset, depth);
+        HandleSingleFile hsf = new HandleSingleFile(referenceChannel, zStackDirection, stiffness, filterSize, offset, depth, sigma);
         ImagePlus mainChannelsOutput = hsf.process();
         outputChannels[referenceIndx] = mainChannelsOutput;
         float[] envMaxzValues = hsf.getEnvMaxzValues();

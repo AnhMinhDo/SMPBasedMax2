@@ -167,6 +167,7 @@ public class MainController {
                 view.getSpinner2FilterSize(),
                 view.getSpinner3Offset(),
                 view.getSpinner4Depth(),
+                view.getSpinnerSigma(),
                 view.getTextField2SingleFilePath(),
                 view.getTextField1DirPath(),
                 view.getCheckBox2SingleFileRef(),

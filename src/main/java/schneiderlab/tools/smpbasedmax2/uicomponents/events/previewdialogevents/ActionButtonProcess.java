@@ -21,11 +21,13 @@ public class ActionButtonProcess implements ActionListener {
     private JSpinner spinnerFilterSize;
     private JSpinner spinnerOffSet;
     private JSpinner spinnerDepth;
+    private JSpinner spinnerSigma;
     private PreviewDialog previewDialogView;
     private boolean hasChannels;
     private int channelIdx;
     private int stiffness;
     private int filterSize;
+    private double sigma;
     private int offSet;
     private int depth;
     private ZStackDirection zStackDirection;
@@ -45,6 +47,7 @@ public class ActionButtonProcess implements ActionListener {
         this.spinnerFilterSize= previewDialogView.getSpinner2FilterSize();
         this.spinnerOffSet= previewDialogView.getSpinner3Offset();
         this.spinnerDepth= previewDialogView.getSpinner4Depth();
+        this.spinnerSigma = previewDialogView.getSpinnerSigma();
         this.hasChannels= hasChannels;
         this.channelIdx= channelIdx;
         this.inputImage= inputImage;
@@ -58,6 +61,7 @@ public class ActionButtonProcess implements ActionListener {
         zStackDirection = (ZStackDirection) zStackDirectionCombobox.getSelectedItem();
         stiffness = (int)spinnerStiffness.getValue();
         filterSize = (int)spinnerFilterSize.getValue();
+        sigma = (double) spinnerSigma.getValue();
         offSet = (int)spinnerOffSet.getValue();
         depth = (int)spinnerDepth.getValue();
 //        ImagePlus inputImagePlus = new ImagePlus(inputImage.toAbsolutePath().toString());
@@ -75,6 +79,7 @@ public class ActionButtonProcess implements ActionListener {
                     zStackDirection,
                     offSet,
                     depth,
+                    sigma,
                     outputImage,
                     channelIdx
             );
@@ -98,6 +103,7 @@ public class ActionButtonProcess implements ActionListener {
                     zStackDirection,
                     offSet,
                     depth,
+                    sigma,
                     outputImage,
                     inputImage
             );

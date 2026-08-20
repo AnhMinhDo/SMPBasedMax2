@@ -26,6 +26,7 @@ public class HandleSingleFileWithChannelsSaveOutput {
     private final ZStackDirection zStackDirection;
     private final int offset;
     private final int depth;
+    private final double sigma;
     private float[] envMaxzValues;
     private int refIdx;
 
@@ -43,6 +44,7 @@ public class HandleSingleFileWithChannelsSaveOutput {
                                                ZStackDirection zStackDirection,
                                                int offset,
                                                int depth,
+                                              double sigma,
                                               int refIdx) {
         this.inputPath = inputPath;
         this.inputImage = inputImage;
@@ -52,6 +54,7 @@ public class HandleSingleFileWithChannelsSaveOutput {
         this.zStackDirection = zStackDirection;
         this.offset = offset;
         this.depth = depth;
+        this.sigma = sigma;
         this.refIdx=refIdx;
     }
 
@@ -93,7 +96,8 @@ public class HandleSingleFileWithChannelsSaveOutput {
                 filterSize,
                 zStackDirection,
                 offset,
-                depth);
+                depth,
+                sigma);
         ImagePlus refSMP = hsfncso.process();
         outputChannels[refIdx] = refSMP;
         this.envMaxzValues = hsfncso.getEnvMaxzValues();
@@ -167,7 +171,8 @@ public class HandleSingleFileWithChannelsSaveOutput {
                 this.stiffness,
                 this.filterSize,
                 this.offset,
-                this.depth);
+                this.depth,
+                this.sigma);
     }
 
     private void saveMIPZMap(){
@@ -177,7 +182,8 @@ public class HandleSingleFileWithChannelsSaveOutput {
                 this.stiffness,
                 this.filterSize,
                 this.offset,
-                this.depth);
+                this.depth,
+                this.sigma);
     }
 
     private void saveSMP(){
@@ -188,7 +194,8 @@ public class HandleSingleFileWithChannelsSaveOutput {
                     this.stiffness,
                     this.filterSize,
                     this.offset,
-                    this.depth);
+                    this.depth,
+                    this.sigma);
         } else {
             SmpBasedMaxUtil.savePostProcessImagePlus(this.merged,
                     OutputTypeName.SMPbasedMIP,
@@ -196,7 +203,8 @@ public class HandleSingleFileWithChannelsSaveOutput {
                     this.stiffness,
                     this.filterSize,
                     this.offset,
-                    this.depth);
+                    this.depth,
+                    this.sigma);
         }
     }
 
@@ -208,7 +216,8 @@ public class HandleSingleFileWithChannelsSaveOutput {
                     this.stiffness,
                     this.filterSize,
                     this.offset,
-                    this.depth);
+                    this.depth,
+                    this.sigma);
         } else {
             SmpBasedMaxUtil.savePostProcessImagePlusZmap(this.smpZmap,
                     OutputTypeName.SMPbasedMIP_ZMAP,
@@ -216,7 +225,8 @@ public class HandleSingleFileWithChannelsSaveOutput {
                     this.stiffness,
                     this.filterSize,
                     this.offset,
-                    this.depth);
+                    this.depth,
+                    this.sigma);
         }
     }
 }

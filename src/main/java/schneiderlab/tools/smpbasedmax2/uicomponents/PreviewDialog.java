@@ -52,6 +52,8 @@ public class PreviewDialog extends JDialog {
 		this.spinner1Stiffeness = spinner1Stiffeness;
 	}
 
+	public JSpinner getSpinnerSigma(){return spinnerSigma;}
+
 	public JLabel getLabel4FilterSize() {
 		return label4FilterSize;
 	}
@@ -149,6 +151,8 @@ public class PreviewDialog extends JDialog {
 		spinner1Stiffeness = new JSpinner();
 		label4FilterSize = new JLabel();
 		spinner2FilterSize = new JSpinner();
+		labelSigma = new JLabel();
+		spinnerSigma = new JSpinner();
 		label8Offset = new JLabel();
 		spinner3Offset = new JSpinner();
 		label6Depth = new JLabel();
@@ -183,6 +187,8 @@ public class PreviewDialog extends JDialog {
 			"[]" +
 			"[]" +
 			"[]" +
+			"[7]" +
+			"[]" +
 			"[]" +
 			"[]" +
 			"[]" +
@@ -203,7 +209,7 @@ public class PreviewDialog extends JDialog {
 		contentPane.add(spinner1Stiffeness, "cell 3 1");
 
 		//---- label4FilterSize ----
-		label4FilterSize.setText("Enter final Filter size [pixel]:");
+		label4FilterSize.setText("Filter size [pixel]:");
 		label4FilterSize.setLabelFor(spinner2FilterSize);
 		contentPane.add(label4FilterSize, "cell 0 2 3 1,alignx right,growx 0");
 
@@ -211,41 +217,49 @@ public class PreviewDialog extends JDialog {
 		spinner2FilterSize.setModel(new SpinnerNumberModel(30, 0, null, 1));
 		contentPane.add(spinner2FilterSize, "cell 3 2");
 
+		//---- labelSigma ----
+		labelSigma.setText("Sigma:");
+		contentPane.add(labelSigma, "cell 0 3 3 1,alignx right,growx 0");
+
+		//---- spinnerSigma ----
+		spinnerSigma.setModel(new SpinnerNumberModel(0.0, 0.0, null, 0.1));
+		contentPane.add(spinnerSigma, "cell 3 3");
+
 		//---- label8Offset ----
 		label8Offset.setText("Offset [pixels]:");
 		label8Offset.setToolTipText("Offset-N planes above(+) or below(-) blanket [pixels]");
-		contentPane.add(label8Offset, "cell 0 3 3 1,alignx right,growx 0");
+		contentPane.add(label8Offset, "cell 0 5 3 1,alignx right,growx 0");
 
 		//---- spinner3Offset ----
 		spinner3Offset.setModel(new SpinnerNumberModel(0, null, null, 1));
-		contentPane.add(spinner3Offset, "cell 3 3");
+		contentPane.add(spinner3Offset, "cell 3 5");
 
 		//---- label6Depth ----
 		label6Depth.setText("Depth [pixels]:");
 		label6Depth.setLabelFor(spinner4Depth);
 		label6Depth.setToolTipText("Depth:MIP for N pixels into blanket [pixels]");
-		contentPane.add(label6Depth, "cell 0 4 3 1,alignx right,growx 0");
+		contentPane.add(label6Depth, "cell 0 6 3 1,alignx right,growx 0");
 
 		//---- spinner4Depth ----
 		spinner4Depth.setModel(new SpinnerNumberModel(0, null, null, 1));
-		contentPane.add(spinner4Depth, "cell 3 4");
+		contentPane.add(spinner4Depth, "cell 3 6");
 
 		//---- textField3Status ----
 		textField3Status.setEditable(false);
-		contentPane.add(textField3Status, "cell 0 5 2 1");
-		contentPane.add(progressBar1, "cell 2 5 2 1");
+		contentPane.add(textField3Status, "cell 0 7 2 1");
+		contentPane.add(progressBar1, "cell 2 7 2 1");
 
 		//---- button1Parameter ----
 		button1Parameter.setText("Confirm Parameters");
-		contentPane.add(button1Parameter, "cell 1 6");
+		contentPane.add(button1Parameter, "cell 1 8");
 
 		//---- button5Cancel ----
 		button5Cancel.setText("Cancel");
-		contentPane.add(button5Cancel, "cell 2 6");
+		contentPane.add(button5Cancel, "cell 2 8");
 
 		//---- button4StartProcess ----
 		button4StartProcess.setText("Update Preview");
-		contentPane.add(button4StartProcess, "cell 3 6");
+		contentPane.add(button4StartProcess, "cell 3 8");
 		pack();
 		setLocationRelativeTo(getOwner());
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
@@ -259,6 +273,8 @@ public class PreviewDialog extends JDialog {
 	private JSpinner spinner1Stiffeness;
 	private JLabel label4FilterSize;
 	private JSpinner spinner2FilterSize;
+	private JLabel labelSigma;
+	private JSpinner spinnerSigma;
 	private JLabel label8Offset;
 	private JSpinner spinner3Offset;
 	private JLabel label6Depth;

@@ -26,6 +26,7 @@ public class ProcessPreviewFileWorker extends SwingWorker<Void, Void> {
     private final ZStackDirection zStackDirection;
     private final int offset;
     private final int depth;
+    private final double sigma;
     private float[] envMaxzValues;
     private final boolean hasManyChannels;
     private final int referenceChannelIdx;
@@ -45,6 +46,7 @@ public class ProcessPreviewFileWorker extends SwingWorker<Void, Void> {
                                     ZStackDirection zStackDirection,
                                     int offset,
                                     int depth,
+                                    double sigma,
                                     String filePath,
                                     JTextField statusBar,
                                     boolean hasManyChannels,
@@ -57,6 +59,7 @@ public class ProcessPreviewFileWorker extends SwingWorker<Void, Void> {
         this.zStackDirection = zStackDirection;
         this.offset = offset;
         this.depth = depth;
+        this.sigma = sigma;
         this.filePath = filePath;
         this.statusBar = statusBar;
         this.hasManyChannels = hasManyChannels;
@@ -82,7 +85,8 @@ public class ProcessPreviewFileWorker extends SwingWorker<Void, Void> {
                     stiffness,
                     filterSize,
                     offset,
-                    depth);
+                    depth,
+                    sigma);
             this.result = handleSingleFile.process();
             // Update progress bar
             percentageOfCompletedTask = percentageOfCompletedTask + percentageOf1Task;
@@ -94,7 +98,7 @@ public class ProcessPreviewFileWorker extends SwingWorker<Void, Void> {
             double percentageOfCompletedTask = 0;
             // Perform single file projection
             this.inputImage = new ImagePlus(filePath);
-            HandleSingleFileWithChannels handleSingleFileWithChannels = new HandleSingleFileWithChannels(inputImage,zStackDirection,stiffness,filterSize,offset,depth,referenceChannelIdx);
+            HandleSingleFileWithChannels handleSingleFileWithChannels = new HandleSingleFileWithChannels(inputImage,zStackDirection,stiffness,filterSize,offset,depth,sigma,referenceChannelIdx);
             this.result = handleSingleFileWithChannels.process();
             // Update progress bar
             percentageOfCompletedTask = percentageOfCompletedTask + percentageOf1Task;

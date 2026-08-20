@@ -24,6 +24,7 @@ public class ActionButtonProcess implements ActionListener {
     private JSpinner filterSize;
     private JSpinner offset;
     private JSpinner depth;
+    private JSpinner sigma;
     private JTextField filePathTextField;
     private JTextField directoryPathTextField;
     private JCheckBox otherChannelProjectionSingleMode;
@@ -49,6 +50,7 @@ public class ActionButtonProcess implements ActionListener {
                                JSpinner filterSize,
                                JSpinner offset,
                                JSpinner depth,
+                               JSpinner sigma,
                                JTextField filePathTextField,
                                JTextField directoryPathTextField,
                                JCheckBox otherChannelProjectionSingleMode,
@@ -67,6 +69,7 @@ public class ActionButtonProcess implements ActionListener {
         this.filterSize = filterSize;
         this.offset = offset;
         this.depth = depth;
+        this.sigma = sigma;
         this.filePathTextField = filePathTextField;
         this.directoryPathTextField = directoryPathTextField;
         this.otherChannelProjectionSingleMode = otherChannelProjectionSingleMode;
@@ -100,6 +103,7 @@ public class ActionButtonProcess implements ActionListener {
                             zStackDirection,
                             (int) offset.getValue(),
                             (int) depth.getValue(),
+                            (double) sigma.getValue(),
                             filePathTextField.getText(),
                             statusBar,
                             hasManyChannels,
@@ -125,6 +129,7 @@ public class ActionButtonProcess implements ActionListener {
                             zStackDirection,
                             (int) offset.getValue(),
                             (int) depth.getValue(),
+                            (double) sigma.getValue(),
                             filePathTextField.getText(),
                             statusBar,
                             hasManyChannels,
@@ -153,6 +158,7 @@ public class ActionButtonProcess implements ActionListener {
                     zStackDirection,
                     (int) offset.getValue(),
                     (int) depth.getValue(),
+                    (double) sigma.getValue(),
                     hasManyChannels,
                     referenceChannelIdx,
                     statusBar,

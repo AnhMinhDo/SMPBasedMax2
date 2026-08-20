@@ -23,6 +23,7 @@ public class PreviewDialogWithChannelsWorker extends SwingWorker<Void, Void> {
     private final ZStackDirection zStackDirection;
     private final int offset;
     private final int depth;
+    private final double sigma;
     private float[] envMaxzValues;
 //    private final boolean hasManyChannels;
     private final int referenceChannelIdx;
@@ -44,6 +45,7 @@ public class PreviewDialogWithChannelsWorker extends SwingWorker<Void, Void> {
                                               ZStackDirection zStackDirection,
                                               int offset,
                                               int depth,
+                                              double sigma,
                                               ImagePlus result,
                                               int refChannelIdx) {
         this.statusBar = statusBar;
@@ -55,6 +57,7 @@ public class PreviewDialogWithChannelsWorker extends SwingWorker<Void, Void> {
         this.zStackDirection = zStackDirection;
         this.offset = offset;
         this.depth = depth;
+        this.sigma = sigma;
         this.result = result;
         this.referenceChannelIdx=refChannelIdx;
     }
@@ -68,6 +71,7 @@ public class PreviewDialogWithChannelsWorker extends SwingWorker<Void, Void> {
                 filterSize,
                 offset,
                 depth,
+                sigma,
                 referenceChannelIdx);
         ImagePlus output = handleSingleFileWithChannels.process();
 //        ImageProcessor outputProcessor = output.getProcessor();

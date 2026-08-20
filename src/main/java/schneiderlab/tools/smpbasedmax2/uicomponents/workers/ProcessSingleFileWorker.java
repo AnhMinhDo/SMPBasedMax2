@@ -27,6 +27,7 @@ public class ProcessSingleFileWorker extends SwingWorker<Void,Void> {
     private final ZStackDirection zStackDirection;
     private final int offset;
     private final int depth;
+    private final double sigma;
     private float[] envMaxzValues;
     private final boolean hasManyChannels;
     private final int referenceChannelIdx;
@@ -46,6 +47,7 @@ public class ProcessSingleFileWorker extends SwingWorker<Void,Void> {
                                    ZStackDirection zStackDirection,
                                    int offset,
                                    int depth,
+                                   double sigma,
                                    String filePath,
                                    JTextField statusBar,
                                    boolean hasManyChannels,
@@ -58,6 +60,7 @@ public class ProcessSingleFileWorker extends SwingWorker<Void,Void> {
         this.zStackDirection = zStackDirection;
         this.offset = offset;
         this.depth = depth;
+        this.sigma = sigma;
         this.filePath = filePath;
         this.statusBar = statusBar;
         this.hasManyChannels = hasManyChannels;
@@ -85,7 +88,8 @@ public class ProcessSingleFileWorker extends SwingWorker<Void,Void> {
                     filterSize,
                     zStackDirection,
                     offset,
-                    depth);
+                    depth,
+                    sigma);
             hsfncso.processAndSaveOutput();
             // Update progress bar
             percentageOfCompletedTask = percentageOfCompletedTask + percentageOf1Task;
@@ -107,6 +111,7 @@ public class ProcessSingleFileWorker extends SwingWorker<Void,Void> {
                     zStackDirection,
                     offset,
                     depth,
+                    sigma,
                     referenceChannelIdx);
             hsfwcso.processAndSaveOutput();
             // Update progress bar
@@ -135,12 +140,12 @@ public class ProcessSingleFileWorker extends SwingWorker<Void,Void> {
 
             // Save SMP projected image and zMap
             if(depth == 0 ) {
-                SmpBasedMaxUtil.savePostProcessImagePlus(output, OutputTypeName.SMP, Paths.get(filePath), stiffness, filterSize, offset, depth);
+                SmpBasedMaxUtil.savePostProcessImagePlus(output, OutputTypeName.SMP, Paths.get(filePath), stiffness, filterSize, offset, depth,sigma);
 //            SmpBasedMaxUtil.savePostProcessImagePlus(this.smpZmap, OutputTypeName.SMP_ZMAP,resultDir,fileName, stiffness, filterSize, offset, depth);
             }
             // Save SMP depth-adjusted image and zMap
             if (depth != 0) {
-                SmpBasedMaxUtil.savePostProcessImagePlus(output, OutputTypeName.SMPbasedMIP,Paths.get(filePath), stiffness, filterSize, offset, depth);
+                SmpBasedMaxUtil.savePostProcessImagePlus(output, OutputTypeName.SMPbasedMIP,Paths.get(filePath), stiffness, filterSize, offset, depth, sigma);
 //                SmpBasedMaxUtil.savePostProcessImagePlus(this.smpMipZmap, OutputTypeName.SMPbasedMIP_ZMAP,resultDir,fileName, stiffness, filterSize, offset, depth);
             }
         }

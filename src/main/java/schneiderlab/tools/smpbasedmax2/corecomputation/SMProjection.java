@@ -7,6 +7,7 @@ import ij.process.FloatProcessor;
 import ij.process.ImageProcessor;
 import schneiderlab.tools.smpbasedmax2.ZStackDirection;
 import schneiderlab.tools.smpbasedmax2.helpersandutils.ConvertUtils;
+import schneiderlab.tools.smpbasedmax2.helpersandutils.SmpBasedMaxUtil;
 
 import java.util.Arrays;
 

@@ -23,6 +23,7 @@ public class ProcessMultipleFileWorker extends SwingWorker<Void, Void> {
     private final ZStackDirection zStackDirection;
     private final int offset;
     private final int depth;
+    private final double sigma;
     private float[] envMaxzValues;
     private final boolean hasManyChannels;
     private final int referenceChannelIdx;
@@ -36,7 +37,9 @@ public class ProcessMultipleFileWorker extends SwingWorker<Void, Void> {
                                      int stiffness,
                                      int filterSize,
                                      ZStackDirection zStackDirection,
-                                     int offset, int depth,
+                                     int offset,
+                                     int depth,
+                                     double sigma,
                                      boolean hasManyChannels,
                                      int referenceChannelIdx,
                                      JTextField statusBar,
@@ -49,6 +52,7 @@ public class ProcessMultipleFileWorker extends SwingWorker<Void, Void> {
         this.zStackDirection = zStackDirection;
         this.offset = offset;
         this.depth = depth;
+        this.sigma = sigma;
         this.hasManyChannels = hasManyChannels;
         this.referenceChannelIdx = referenceChannelIdx;
         this.statusBar = statusBar;
@@ -84,7 +88,8 @@ public class ProcessMultipleFileWorker extends SwingWorker<Void, Void> {
                         filterSize,
                         zStackDirection,
                         offset,
-                        depth);
+                        depth,
+                        sigma);
                 hsfncso.processAndSaveOutput();
                 current++;
                 int progress = (int) ((current * 100.0f) / totalNumberOfFile);
@@ -106,6 +111,7 @@ public class ProcessMultipleFileWorker extends SwingWorker<Void, Void> {
                         zStackDirection,
                         offset,
                         depth,
+                        sigma,
                         referenceChannelIdx);
                 hsfwcso.processAndSaveOutput();
                 current++;

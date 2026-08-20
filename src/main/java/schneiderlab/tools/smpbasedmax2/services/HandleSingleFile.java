@@ -20,6 +20,7 @@ public class HandleSingleFile {
     private final ZStackDirection zStackDirection;
     private final int offset;
     private final int depth;
+    private final double sigma;
     private float[] envMaxzValues;
 
     private ImagePlus projectedImage;
@@ -36,13 +37,15 @@ public class HandleSingleFile {
                             int stiffness,
                             int filterSize,
                             int offset,
-                            int depth) {
+                            int depth,
+                            double sigma) {
         this.inputImage = inputImage;
         this.zStackDirection = zStackDirection;
         this.stiffness = stiffness;
         this.filterSize = filterSize;
         this.offset = offset;
         this.depth = depth;
+        this.sigma = sigma;
     }
 
     public ImagePlus process(){
@@ -92,10 +95,17 @@ public class HandleSingleFile {
     private void performProcessing(){
         // create imagePlus object from filePath
         inputImage = SmpBasedMaxUtil.preProcessInputImage(this.inputImage);
-        // ZProjecting MIP
-        MaxIntensityProjection projector = new MaxIntensityProjection(inputImage);
-        this.projectedImage = projector.doProjection();
-        this.zMap = projector.getZmap();
+        // MIP of original Image
+        MaxIntensityProjection mipOriginalStack = new MaxIntensityProjection(inputImage);
+        this.projectedImage = mipOriginalStack.doProjection();
+        this.zMap = mipOriginalStack.getZmap();
+        // GaussianBlur and MIP
+        if(this.sigma!=0.0){
+            ImagePlus blurStack = SmpBasedMaxUtil.gaussianBlurImageStack(inputImage,this.sigma);
+            MaxIntensityProjection mipBlurStack = new MaxIntensityProjection(blurStack);
+            mipBlurStack.doProjection();
+            this.zMap = mipBlurStack.getZmap();
+        }
         // ZProjecting SMP
         SMProjection smProjector = new SMProjection(inputImage, zMap, stiffness, filterSize, zStackDirection, offset);
         this.projectedSMPImage = smProjector.doSMProjection();
